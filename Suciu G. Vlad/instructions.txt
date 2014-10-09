@@ -1,1 +1,2 @@
-- play nice
+v0.1
+- started working on repository: LabDSA

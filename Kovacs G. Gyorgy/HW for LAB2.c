@@ -8,7 +8,7 @@ typedef struct NODETYPE{
 NODE *first;
 NODE *last;
 
-void init(){
+void ListInit(){
     first = (NODE*) malloc(sizeof(NODE));
     last = (NODE*) malloc(sizeof(NODE));
     first->key = 1337;
@@ -17,33 +17,30 @@ void init(){
     last->next = NULL;
 }
 
-void add(int x){
+void ListAddFirstElement(int x){
     NODE *temp1 = (NODE*) malloc(sizeof(NODE));
     temp1->key = x;
     temp1->next = first;
 
-    //Switch(first,temp1)
-    NODE *temp2 = (NODE*) malloc(sizeof(NODE));
-    temp2 = temp1;
-    temp1 = first;
-    first = temp2;
+    first = temp1;
 }
 
-void out(){
+void ListPrint(){
     NODE *temp = (NODE*) malloc(sizeof(NODE));
     temp = first;
-    int i = 0;
+    int counter = 0;
     while(temp->next != NULL){
-        printf("[%d] = %d\n",i++,temp->key);
+        printf("[%d] = %d\n",counter++,temp->key);
         temp = temp->next;
     }
-    printf("[%d] = %d\n\n\n",i++,temp->key);
+    printf("[%d] = %d\n\n\n",counter,temp->key);
 }
 
 int main(){
-    init();
-    add(80085);
-    out();
+    ListInit();
+    ListAddFirstElement(80085);
+    ListAddFirstElement(123);
+    ListPrint();
     printf("Hello World!");
     return 0;
 }

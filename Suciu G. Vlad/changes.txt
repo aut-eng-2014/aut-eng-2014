@@ -1,0 +1,4 @@
+v0.1
+- started working on repository
+v0.2
+- added homework to lab 02

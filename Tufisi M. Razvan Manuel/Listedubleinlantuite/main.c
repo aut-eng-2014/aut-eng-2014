@@ -3,7 +3,6 @@
 
 
 
-
 typedef struct node
 {
     int key;
@@ -66,6 +65,38 @@ nodeT *finde(int key)
     return NULL;
 }
 
+void remov(int key)
+{
+    nodeT *temp=(nodeT*)malloc(sizeof(nodeT));
+    temp->key=key;
+
+    if ((first == NULL) && (last ==NULL))
+    {
+        free(temp);
+    }
+    else if(key == first->key)
+    {
+        first = last -> next;
+        first -> prev =NULL;
+        free(temp);
+    }
+    else if (key == last->key)
+    {
+        last = last -> prev;
+        last -> next = NULL;
+        free(temp);
+    }
+    else
+    {
+        temp -> next -> prev = temp -> prev;
+        temp -> prev -> next = temp -> next;
+        free(temp);
+    }
+
+}
+
+
+
 
 void afis()
 {
@@ -84,12 +115,19 @@ int main()
     init();
     addfirst(7);
     addlast(9);
+
+
     afis();
 
-   nodeT *b=finde(9);
+    nodeT *b=finde(9);
     if(b!=NULL)
         printf("%d",b->key);
     else
-        printf("Value not found");
+     printf("Value not found");
+     printf("\n");
+    remov(9);
+    afis();
+
+
     return 0;
 }

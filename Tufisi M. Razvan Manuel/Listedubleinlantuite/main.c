@@ -95,8 +95,68 @@ void remov(int key)
 
 }
 
+int numarare()
+{
+    int i=0;
+    nodeT *temp;
+    temp=first;
+    while (temp != 0)
+    {
+        temp=temp->next;
+        i++;
+    }
+    return i;
+}
 
+void InsertionSort()
+{
+    int aux;
+    nodeT *temp=(nodeT*)malloc(sizeof(nodeT));
+    nodeT *temp1=(nodeT*)malloc(sizeof(nodeT));
+    temp=first;
+    temp1=first;
+    while(temp!=NULL)
+    {
+        while((temp->key)>=(temp1->next->key))
+        {
+            aux=temp->key;
+            temp->key=temp1->next->key;
+            temp1->next->key=aux;
+        }
+        temp=temp->next;
+    }
+}
 
+void listsort(int n)
+{
+    nodeT *temp,*current,*nextone;
+    int i,j;
+    for(i=0; i<n; i++)
+    {
+        current = first;
+        for(j=0; j<n-1-i; j++ )
+        {
+            if(current->key > current->next->key)
+            {
+                nextone = current->next;
+                current->next = nextone->next;
+                nextone->next = current;
+                if(current == first)
+                {
+                    first = nextone;
+                    current = nextone;
+                }
+                else
+                {
+                    current = nextone;
+                    temp->next = nextone;
+                }
+            }
+            temp = current;
+            current = current->next;
+        }
+    }
+}
 
 void afis()
 {
@@ -112,10 +172,11 @@ void afis()
 
 int main()
 {
+    int n;
     init();
     addfirst(7);
     addlast(9);
-
+    n=numarare();
 
     afis();
 
@@ -127,6 +188,9 @@ int main()
     printf("\n");
     remov(9);
     afis();
+    printf("%d",numarare());
+
+    //listsort(n);
 
 
     return 0;

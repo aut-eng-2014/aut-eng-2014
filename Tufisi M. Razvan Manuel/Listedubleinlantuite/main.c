@@ -123,8 +123,8 @@ int main()
     if(b!=NULL)
         printf("%d",b->key);
     else
-     printf("Value not found");
-     printf("\n");
+        printf("Value not found");
+    printf("\n");
     remov(9);
     afis();
 

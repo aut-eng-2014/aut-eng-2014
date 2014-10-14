@@ -68,31 +68,48 @@ nodeT *finde(int key)
 void remov(int key)
 {
     nodeT *temp=(nodeT*)malloc(sizeof(nodeT));
-    temp->key=key;
+    temp=first;
+    while(temp!=NULL)
+    {
 
-    if ((first == NULL) && (last ==NULL))
-    {
-        free(temp);
-    }
-    else if(key == first->key)
-    {
-        first = last -> next;
-        first -> prev =NULL;
-        free(temp);
-    }
-    else if (key == last->key)
-    {
-        last = last -> prev;
-        last -> next = NULL;
-        free(temp);
-    }
-    else
-    {
-        temp -> next -> prev = temp -> prev;
-        temp -> prev -> next = temp -> next;
-        free(temp);
-    }
+        if ((first == NULL) && (last ==NULL))
+        {
+            free(temp);
+        }
+        else
+        {
+            if(temp->key == key)
+            {
+                if(temp==first)
+                {
+                    first = first -> next;
+                    first -> prev =NULL;
+                    free(temp);
+                    break;
+                }
+                if(temp==last)
+                {
+                    last = last -> prev;
+                    last -> next = NULL;
+                    free(temp);
+                    break;
+                }
+                else
+                {
+                    temp -> next -> prev = temp -> prev;
+                    temp -> prev -> next = temp -> next;
+                    free(temp);
+                    break;
+                }
+                temp=temp->next;
 
+            }
+            else
+            {
+                temp=temp->next;
+            }
+        }
+    }
 }
 
 int numarare()
@@ -100,7 +117,7 @@ int numarare()
     int i=0;
     nodeT *temp;
     temp=first;
-    while (temp != 0)
+    while (temp != NULL)
     {
         temp=temp->next;
         i++;

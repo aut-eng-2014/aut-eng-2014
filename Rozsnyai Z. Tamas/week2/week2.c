@@ -174,15 +174,17 @@ int main()
     while (menupoint!=6)
     {
         menupoint=menu();
-
-        if (menupoint==0)
+        switch (menupoint)
+        {
+        case 0:
         {
             listout();
             printf("\n Press any key!");
 
             key=getch();
+            break;
         }
-        if (menupoint==1)
+        case 1:
         {
             menu1:
             system("cls");
@@ -209,9 +211,9 @@ int main()
                     goto menu1;
                 }
             }
-
+        break;
         }
-        if (menupoint==2)
+        case 2:
         {
 
             p=First;
@@ -230,6 +232,7 @@ int main()
                     q->prev=p->prev;
                     system("cls");
                     printf("Removed!");
+                    free(p);
                     enr--;
                     key='R';
                 }
@@ -239,9 +242,9 @@ int main()
                 }
 
             }
-
+        break;
         }
-        if (menupoint==3)
+        case 3:
         {
             printf("Number:");
             scanf("%d",&x);
@@ -255,38 +258,22 @@ int main()
             printf("The nr:%d is stored at the adress:%d\n Press any key!",x,y);
             }
             key=getch();
+            break;
         }
-        if (menupoint==4)
+        case 4:
         {
             sort_bb();
+            break;
         }
-        if (menupoint==5)
+        case 5:
         {
             x=count();
             printf("Nr. of elements:%d\n Press any key!",x);
             key=getch();
             enr=x;
+        break;
         }
-
-    }
-
-
-
-
-    //First->key=1;
-    //Last->key=2;
-    p=First;
-    //AddFirst(8);
-   // AddLast(9);
-    printf("Keys: ");
-    p=First;
-    while(p!=NULL)
-    {
-
-        printf("%d ",p->key);
-
-        p=p->next;
-
+        }
     }
 
 

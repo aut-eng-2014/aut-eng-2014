@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+//structure of a node
+typedef struct node
+{
+    int value;
+    struct node *next; //link to the next node
+}NodeT;
+
+struct node *first, *last; //or NodeT *first,*last;
+
+void initiate ()
+{
+    first=(NodeT*)malloc(sizeof(NodeT)); //reserve space
+    last=(NodeT*)malloc(sizeof(NodeT)); //reserve space
+    first->value=1;
+    last->value=2;
+    first->next=last;
+    last->next=NULL;
+}
+
+void addlast (int val)
+{
+    struct node *neew; //or NodeT *neew;
+    neew=(NodeT*)malloc(sizeof(NodeT)); //reserve space
+    last->next=neew;
+    neew->value=val;
+    last=neew;
+    last->next=NULL;
+}
+
+void addfirst (int val)
+{
+    struct node *neew; //or NodeT *neew;
+    neew=(NodeT*)malloc(sizeof(NodeT)); //reserve space
+    neew->value=val;
+    neew->next=first;
+    first=neew;
+}
+
+void traversal()
+{
+    struct node *neew; //or NodeT *neew;
+    neew=(NodeT*)malloc(sizeof(NodeT)); //reserve space
+    neew=first;
+    while(neew!=NULL)
+    {
+        printf("%d ",neew->value);
+        neew=neew->next;
+    }
+}
+int main()
+{
+    initiate();
+    printf("%d %d \n",first->value,last->value);
+
+    addlast(3);
+    printf("%d %d \n",first->value,last->value);
+
+    addfirst(4);
+    printf("%d %d \n",first->value,last->value);
+
+    traversal();
+
+    return 0;
+
+}

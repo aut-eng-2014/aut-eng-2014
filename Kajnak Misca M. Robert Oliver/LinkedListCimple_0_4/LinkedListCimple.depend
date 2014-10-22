@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1412880458 source:c:\cppk\linkedlistcimple\main.c
+	<stdio.h>
+	<stdlib.h>
+	"DLList.h"
+
+1412880938 source:c:\cppk\linkedlistcimple\dllist.c
+	"DLList.h"
+
+1412880955 c:\cppk\linkedlistcimple\dllist.h
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+

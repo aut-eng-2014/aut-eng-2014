@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1414062572 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.5\main.c
+	"functions.h"
+
+1413987292 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.5\functions.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"functions_lists.h"
+	"functions_trees.h"
+
+1414061614 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.5\functions_lists.h
+
+1413987069 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.5\functions_trees.h
+
+1413987372 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.5\functions_trees.c
+	"functions.h"
+
+1414062257 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.5\functions_lists.c
+	"functions.h"
+

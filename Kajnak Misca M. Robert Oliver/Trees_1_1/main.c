@@ -230,6 +230,29 @@ void createListFromTree (node * p)
     }
 }
 
+lst *l;
+node* createTreeFromList()///in light of what you have just showed me, I will try to make a simpler conversion
+{
+    node * p=(node*)malloc(sizeof(node));
+
+    p->val=l->val;
+    p->type=l->type;
+
+    if (l->type=='c')
+    {
+        l=l->next;
+        p->left=createTreeFromList(l);
+        l=l->next;
+        p->right=createTreeFromList(l);
+    }
+    else
+    {
+        p->left=NULL;
+        p->right=NULL;
+    }
+    return p;
+}
+
 lst* pop(lst* s)///returns the new (last element)
 {
     if (s!=NULL)
@@ -341,7 +364,7 @@ void printlst()///just an auxiliary function to see if the stack is good. Or evi
 
 }
 
-int main() ///正しい,普通の木でわありません - NGLN reference. 'Cause you always need some reference
+int main() ///正しい,普通の木でわありません - NGNL reference. 'Cause you always need some reference
 {           ///google translate this if you want a laugh, but I actually (am fairly positive, that) wrote it correctly, saying "Actually, this is not an ordinary tree"
             ///all hail google translate!
     f=fopen("function.txt","r");
@@ -371,6 +394,12 @@ int main() ///正しい,普通の木でわありません - NGLN reference. 'Cau
     printf("\n");///problem 6.5 didn't say it had to be converted back, only that "such a way that you can reconstruct the tree"
                 ///It can obvously be reconstructed, just replace the fscanf w/ p->val and p->type from the createBinaryTree
                 ///If you deem it necessary I will ad that aswell
+
+    printf("\nAfter recreating tree:\n");
+    l=first;
+    node* tree2=createTreeFromList(first);
+    preorder(tree2);
+    printf("\n");
 
     printf("%.2f",calculate());
 

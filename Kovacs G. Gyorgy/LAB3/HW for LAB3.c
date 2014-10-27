@@ -1,6 +1,11 @@
 #include <stdio.h>
 
-typedef enum BOOL{false,true}bool; // I like to be able to use bool
+#define Great_Succes 0
+
+typedef enum BOOL{
+	false,
+	true
+} bool; // I like to be able to use bool
 
 typedef struct NODETYPE{
 	int key;
@@ -228,6 +233,7 @@ NODE *ListElement(int k){
 }
 
 int main(){
-    //Everything worked when I tried it. 100%.
-	return 0;
+    // Everything worked when I tried it. 100%.
+    // Let us try to change something with the edit tool on github...
+	return Great_Succes;
 }

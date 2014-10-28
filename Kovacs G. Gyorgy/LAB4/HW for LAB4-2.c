@@ -1,3 +1,8 @@
+/*
+4.6.5. 
+Transform a binary tree holding character strings into a doubly-linked list such a way that you can reconstruct the
+tree. The input is specified as for Problem 4.3. Output is prefix and infix traversals of the tree on two separate lines.
+*/
 #include <stdio.h>
 
 #define Great_Succes 0

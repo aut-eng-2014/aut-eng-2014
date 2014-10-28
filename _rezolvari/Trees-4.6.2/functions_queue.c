@@ -1,12 +1,21 @@
 #include "functions.h"
 
-QueueN *peek(){
+/**
+* Returns the first element in the queue
+*/
+QueueN *peek()
+{
     return head;
 }
 
-void enqueue(char *content){
+/**
+* Introduces an element with content 'content' at the top of the queue
+*/
+void enqueue(char *content)
+{
 
-    if(head==NULL){
+    if(head==NULL)
+    {
         head = (QueueN*)malloc(sizeof(QueueN));
         head-> content = content;
     }
@@ -27,8 +36,14 @@ void enqueue(char *content){
         last = node;
     }
 }
-void dequeue(){
-    if(head!=NULL){
+
+/**
+* Removes the first element in the queue
+*/
+void dequeue()
+{
+    if(head!=NULL)
+    {
         head = head->next;
     }
 }

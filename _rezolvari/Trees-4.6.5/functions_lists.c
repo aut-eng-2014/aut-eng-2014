@@ -1,5 +1,8 @@
 #include "functions.h"
 
+/**
+* A special "addLast" function for our list
+*/
 void addLast(char *key)
 {
     if(first==NULL){
@@ -27,6 +30,9 @@ void addLast(char *key)
     }
 }
 
+/**
+* "Exhaustive" deleteNode function
+*/
 void deleteNode(NodeL *node)
 {
     if(node==first)

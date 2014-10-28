@@ -1,5 +1,8 @@
 #include "functions.h"
 
+/**
+* The classic 'createBinTree'
+*/
 NodeT *createBinTree()
 {
     NodeT *p;

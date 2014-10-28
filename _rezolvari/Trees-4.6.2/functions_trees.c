@@ -2,13 +2,18 @@
 
 NodeT *createTreeFromQueue();
 
+/**
+* Constructs the queue from the prefix expression and calls the 'createTreeFromQueue' after this is done.
+*/
 NodeT *createTreeFromPrefixExpression(char* prefixExpression)
 {
+    //! 'space' = split element
     const char splitter[1] = " ";
     char * token;
 
     token = strtok(prefixExpression,splitter);
 
+    //! each token = 1x'word' (ex: "this is a sentence"-> 4 tokens: 'this' + 'is' + 'a' + 'sentence')
     while(token!=NULL)
     {
         printf("%s\n",token);
@@ -19,14 +24,22 @@ NodeT *createTreeFromPrefixExpression(char* prefixExpression)
     return createTreeFromQueue();
 }
 
+/**
+* Creates a tree from a queue
+*/
 NodeT *createTreeFromQueue()
 {
     NodeT * node = (NodeT*) malloc(sizeof(NodeT));
 
+    //! get the next element of the queue by 'peeking'
     QueueN * nextElement = peek();
     node->content=nextElement->content;
 
+    //! remove it as we don't need it anymore
     dequeue();
+
+    //! all the leaves are NUMBERS! so if we don't have an operation (i.e, we found a number)
+    //! we return it as a node which will end up as a leaf node
     if(!isOperation(nextElement->content))
     {
         node->left=NULL;

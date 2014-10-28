@@ -23,3 +23,25 @@
 1414074496 source:c:\users\alex\desktop\new folder\trees-4.6.2\functions_trees.c
 	"functions.h"
 
+1414071333 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.2\functions_trees.c
+	"functions.h"
+
+1414066401 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.2\functions.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"functions_queue.h"
+	"functions_trees.h"
+
+1414066123 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.2\functions_queue.h
+
+1414065039 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.2\functions_trees.h
+
+1414066759 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"functions.h"
+
+1414478081 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\trees-4.6.2\functions_queue.c
+	"functions.h"
+

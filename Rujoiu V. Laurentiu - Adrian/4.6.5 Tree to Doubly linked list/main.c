@@ -12,24 +12,19 @@ typedef struct node Node;
 void treetoListRec(Node * node, Node ** last, Node **ptrToHead){
         if(node == NULL)
                 return;
-        /* Go to left most child */
         if(node->left)
                 treetoListRec(node->left, last, ptrToHead);
 
-        /* If this wasn't the first node being added to list*/
         if(*last != NULL){
                 (*last)->right = node;
         }
          else{
                  *ptrToHead = node;
          }
-        /*make left pointer point to last node, and update the
-          last node to current*/
 
         node->left = *last;
         *last = node;
 
-        /* If there is right child, process right child */
         if(node->right)
                 treetoListRec(node->right, last, ptrToHead);
 

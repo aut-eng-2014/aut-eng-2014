@@ -1,7 +1,3 @@
-/*6. Se citeste de la tastatura o expresie postfixata corecta sintactic. Sa se scrie programul de evaluare a sa.
-Expresia contine variabile formate dintr-o litera si operatorii binari +, -, *, /.   */
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

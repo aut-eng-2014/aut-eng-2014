@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1414622756 source:e:\.a.facultate\semiii\dsa\lab\lab3\hw\4.6.5\4.6.5\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+

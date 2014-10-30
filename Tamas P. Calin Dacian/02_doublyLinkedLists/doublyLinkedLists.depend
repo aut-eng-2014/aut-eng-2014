@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1412854890 source:d:\facultate\dsa\lab\doublylinkedlists\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1413385088 source:d:\facultate\data structures and algorithms\_lab\02_doublylinkedlists\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

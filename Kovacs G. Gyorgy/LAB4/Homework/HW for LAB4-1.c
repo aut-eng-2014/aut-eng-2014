@@ -274,7 +274,7 @@ int main(){
     fclose(inputFile);
 
 
-    printPrettyTree();
+    printPrettyTree(tree);
 
     printf("End of program.");
     return Great_Succes;

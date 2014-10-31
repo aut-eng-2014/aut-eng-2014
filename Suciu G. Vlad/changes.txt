@@ -2,3 +2,8 @@ v0.1
 - started working on repository
 v0.2
 - added homework to lab 02
+v0.3
+- added homework to lab 03
+v1.0
+- added homework to lab 04
+- restructured this folder

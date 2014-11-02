@@ -192,15 +192,16 @@ NodeT *DeleteNode(NodeT *root, int content)
 NodeT *q;
 int main()
 {
-    int nr=0,in,out;
+    int nr=0,in,out,srch;
     printf("--->WELCOME!<----");
     printf("\nPress 1 to insert a new node in the BST!\n");
     printf("Press 2 to delete a node from the BST!\n");
     printf("Press 3 to show the BST in INORDER traversal\n");
     printf("Press 4 to show the BST in PREORDER traversal\n");
     printf("Press 5 to show the BST in POSTORDER traversal\n");
-    printf("Press 6 to EXIT!\n");
-    while(nr!=6)
+    printf("Press 6 to search a node in the BST!\n");
+    printf("Press 7 to EXIT!\n");
+    while(nr!=7)
     {
         scanf("%d",&nr);
         if(nr==1)
@@ -229,6 +230,17 @@ int main()
         {
             printf("\nPOSTORDER:\n");
             postorder(root,0);
+        }
+        if(nr==6)
+        {
+            printf("Please insert the value you want to search in the BST:\n");
+            scanf("%d",&srch);
+            q=FindNode(root,srch);
+            if(q==NULL)
+                printf("No node found.\n");
+            else
+                printf("Node found.\n");
+
         }
     }
     return 0;

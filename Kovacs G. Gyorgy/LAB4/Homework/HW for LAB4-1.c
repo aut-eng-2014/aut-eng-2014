@@ -21,10 +21,15 @@ typedef struct COPAC{
     struct TreeNode *drept; // bonus: VALUE has the same length as STANG and DREPT. WIN!
 } TreeNode;
 
-typedef struct STACK{
+typedef struct TREESTACK{
     struct TreeNode *tree; // Basically the value of the node
     struct StackNode *prev;
 } StackNode;
+
+typedef struct{
+    int value;
+    int level;
+} Map;
 
 StackNode *first;
 
@@ -33,9 +38,7 @@ int getValue(TreeNode *t){
 }
 
 void initStack(){
-    printf("Initializing Stack... ");
     first = NULL;
-    printf("- DONE\n");
 }
 
 void pushToStack(TreeNode *t){
@@ -135,65 +138,72 @@ bool isOK(char c){
     }
 }
 
-/*
-    More of some boring prefix tree creation.
-*/
-TreeNode *initializeTreeFromKeyboard(){
-    int input;
 
-    scanf("%d",&input);
+void populateMap(Map m[100], int *l,int lvl, int *lvls, TreeNode *t){
+    if (t != NULL){
+        m[*l].value = t->value;
+        m[*l].level = lvl;
+        (*l)++;
+        if (lvl > *lvls){
+            *lvls = lvl;
+        }
+        populateMap(m,l,lvl+1,lvls,t->stang);
+        populateMap(m,l,lvl+1,lvls,t->drept);
+    }
+}
 
-    if (input == 35){
-        return NULL;
+void printSpace(int a){
+    int i;
+    for (i = 0; i < a; i++){
+        printf(" ");
     }
-    else{
-        TreeNode *temporaryRoot = (TreeNode*) malloc(sizeof(TreeNode));
-        temporaryRoot->value = input;
-        temporaryRoot->stang = initializeTreeFromKeyboard();
-        temporaryRoot->drept = initializeTreeFromKeyboard();
-        return temporaryRoot;
+}
+
+int pow(int a, int b){
+    if (!b) return 1;
+    int i;
+    int A = a;
+    for (i = 1; i < b; i++){
+        a*=A;
     }
+    return a;
 }
 
 void printPrettyTree(TreeNode *t){
-    //TODO make a pretty tree
-}
+    printf("Printig pretty Tree: \n\n");
+    Map m[100];
+    int mapLength = 0;
+    int levels = 0;
+    int slevel = 0;
+    int level = 0;
+    int counter = 0;
 
-/*
-    Prints the tree as a series in prefix form.
-*/
-void printPreorder(TreeNode *p){
-    if (p != NULL){
-        printf("%c ",getValue(p));
-        printPreorder(p->stang);
-        printPreorder(p->drept);
-    }
-}
+    populateMap(m, &mapLength,0 ,&levels,t);
+    slevel = levels;
 
-/*
-    Prints the tree as a series in infix form.
-*/
-void printInorder(TreeNode *p){
-    if(p != NULL){
-        printInorder(p->stang);
-        printf("%c ",p->value);
-        printInorder(p->drept);
-    }
-}
+    for (level = 0; level <= levels; level++){
+        bool first = true;
+        for (counter = 0; counter < mapLength; counter++){
+            if (m[counter].level == level){
+                if (first){
+                    printSpace(pow(2,slevel)-1);
+                    first = false;
+                }
+                else{
+                    printSpace(pow(2,slevel+1)-1);
+                }
+                printf("%c",m[counter].value);
+            }
 
-/*
-    Prints the tree as a series in postfix form.
-*/
-void printPostorder(TreeNode *p){
-    if(p != NULL){
-        printPostorder(p->stang);
-        printPostorder(p->drept);
-        printf("%c ",p->value);
+        }
+        slevel--;
+        printf("\n");
     }
+    printf("\n\n\n");
 }
 
 TreeNode *buildTreeFromFile_Postorder(FILE *file){
-    printf("Building tree...\n");
+    printf("Building tree...");
     char value = getc(file);
     char scrap = getc(file);
     int input = (int) value;
@@ -204,57 +214,24 @@ TreeNode *buildTreeFromFile_Postorder(FILE *file){
     TreeNode *tempRoot = NULL;
 
     while (isOK(input)){
-        printf("\nInput: %c \n",input);
         if (isLetter(input)){
-                printf("Letter detected, pushing to stack.\n");
                 TreeNode *temp = (TreeNode*) malloc(sizeof(TreeNode));
                 temp = leaf(input);
                 pushToStack(temp);
-                printStack();
         }
         else if (isOperator(input)){
-            printf("Operator detected.\n");
             tempLeft = popFromStack();
             tempRight = popFromStack();
             tempRoot = node(input,tempLeft,tempRight);
             pushToStack(tempRoot);
-            printStack();
         }
         value = getc(file);
         scrap = getc(file);
         input = (int)value;
     }
     TreeNode *t = popFromStack();
-    printPreorder(t);
+    printf(" -DONE\n");
     return t;
-}
-
-/*
-    Creating a binary tree in prefix form, nothing fancy.
-*/
-TreeNode *initializeTreeFromFile_Inorder(FILE *file, int level){
-    char value;
-    char trash;
-    value = getc(file);
-    trash = getc(file);
-    int input = (int)value;
-
-    printf("[lvl %2d] Read value : ",level);
-
-    if (!isOK(input)){
-        printf("NULL\n");
-        return NULL;
-    }
-    else{
-        printf("%c\n",input);
-        TreeNode *temporaryRoot = (TreeNode*) malloc(sizeof(TreeNode));
-        temporaryRoot->stang = initializeTreeFromFile_Inorder(file,level+1);
-        temporaryRoot->drept = initializeTreeFromFile_Inorder(file,level+1);
-        temporaryRoot->value = input;
-
-        return temporaryRoot;
-    }
-    return NULL;
 }
 
 int main(){
@@ -269,10 +246,8 @@ int main(){
     }
     else{
         tree = buildTreeFromFile_Postorder(inputFile);
-        printf("Reading from file: Great Succes!\n\n");
     }
     fclose(inputFile);
-
 
     printPrettyTree(tree);
 

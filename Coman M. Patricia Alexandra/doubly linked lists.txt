@@ -1,0 +1,125 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+ typedef struct node
+{
+    int val;
+    struct node *next, *prev;
+} NodeT;
+
+NodeT *first, *last;
+
+void init ()
+{
+
+first=(NodeT*)malloc (sizeof(NodeT));
+last=(NodeT*)malloc (sizeof(NodeT));
+
+first-> val=1;
+first->prev=NULL;
+first-> next=last;
+
+last-> val=2;
+last-> next=NULL;
+last-> prev=first;
+
+}
+
+void addFirst(int value)
+{
+ NodeT *newnode=(NodeT *)malloc(sizeof(NodeT));
+ newnode->val=value;
+ newnode->next=first;
+ newnode->prev=NULL;
+ first->prev=newnode;
+ first=newnode;
+}
+
+
+void addLast ( int value)
+{
+    NodeT *newnode=(NodeT *)malloc(sizeof(NodeT));
+     newnode->val=value;
+     newnode->next=NULL;
+     newnode->prev=last;
+     last->next=newnode;
+     last= newnode;
+}
+
+int count()
+ {int i=1;
+ NodeT *temp =first;
+ while (temp!=NULL)
+   {
+       temp=temp->next;
+       i++;
+   }
+return i;
+ }
+
+NodeT* search(int value)
+{
+    NodeT *temp=first;
+    int ok=0;
+    while (temp!=NULL)
+    {
+        if (value == temp->val)
+           {ok=1; break;}
+        temp=temp->next;
+    }
+    if (ok = 1)
+  return temp;
+}
+
+void removeNode(int value)
+{
+    NodeT *temp=search(value);
+    if (temp==first)
+   {
+        first=temp->next; // il mut pe first peste o pozitie
+        first->prev=NULL;
+
+
+    }
+    else if (temp==last)
+    {
+        last=temp->prev;
+        last->next=NULL; //il mut pe temp o pozitie mai sus
+
+    }
+     else
+       {
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;
+        free(temp);
+    }
+}
+
+void traversal()
+{
+ NodeT *temp=first;
+            while (temp!=NULL)
+            {
+                printf("%d\n", temp->val);
+                temp=temp->next;
+            }
+}
+
+int main()
+{
+    init();
+    addFirst(4);
+    addLast(6);
+    search(2);
+    removeNode(2);
+    int n=count();
+    printf("\nThe list has %d elements\n",n-1);
+    traversal();
+
+    return 0;
+}
+
+
+

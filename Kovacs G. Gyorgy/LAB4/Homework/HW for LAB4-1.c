@@ -1,10 +1,9 @@
 /*
-    Problem 4.6.1
-    "Read a mathematical expression, in postfix form, as a character string, from a text file input. The allowed operators
-    are the usual binary additive (+, -), multiplicative (*, /), and unary sign change (+, -). Build the tree for that
-    expression. Every node should contain either an operator or an operand. A missing operand (for unary operators)
-    is signaled by a # character in the input. Operands can be arbitrary alphabetic strings. ."
-    Working with trees.
+4.6.1
+Read a mathematical expression, in postfix form, as a character string, from a text file input. The allowed operators
+are the usual binary additive (+, -), multiplicative (*, /), and unary sign change (+, -). Build the tree for that
+expression. Every node should contain either an operator or an operand. A missing operand (for unary operators)
+is signaled by a # character in the input. Operands can be arbitrary alphabetic strings. .
 */
 #include <stdio.h>
 
@@ -23,20 +22,24 @@ typedef struct COPAC{
 
 typedef struct TREESTACK{
     struct TreeNode *tree; // Basically the value of the node
-    struct StackNode *prev;
+    struct StackNode *prev; // in my mind, it is prev
 } StackNode;
 
 typedef struct{
     int value;
-    int level;
-} Map;
+    int level; // The level of the value, as in the height from the root, so to say (root is level 0, first child is 1 etc)
+} Map; // This is for the displaying of the tree, the tree's nodes values will populate it, and it is easier to make the tree appear
 
 StackNode *first;
 
+/*
+    I need this little get function to get the treenode value, so I don't use: stack->tree->value (it doesn't work!)
+*/
 int getValue(TreeNode *t){
     return t->value;
 }
 
+//========================Stack Related Stuff================================
 void initStack(){
     first = NULL;
 }
@@ -82,6 +85,8 @@ void printStack(){
         printf("%c]\n",getValue(temp->tree));
     }
 }
+
+//========================End of Stack Stuff===========================================
 
 /*
     @param an integer(ASCII code)
@@ -138,20 +143,24 @@ bool isOK(char c){
     }
 }
 
-
-void populateMap(Map m[100], int *l,int lvl, int *lvls, TreeNode *t){
+/*
+    Each value from the nodes of the tree, will be saved in m(the value and the level)
+    @param Map m[100]: the array wich stores the node info
+    @param/return int *l: the length of the array m
+    @param int lvl: the current level, or height
+    @param TreeNode *t: the tree in question
+*/
+void populateMap(Map m[100], int *l,int lvl, TreeNode *t){
     if (t != NULL){
         m[*l].value = t->value;
         m[*l].level = lvl;
         (*l)++;
-        if (lvl > *lvls){
-            *lvls = lvl;
-        }
-        populateMap(m,l,lvl+1,lvls,t->stang);
-        populateMap(m,l,lvl+1,lvls,t->drept);
+        populateMap(m,l,lvl+1,t->stang);
+        populateMap(m,l,lvl+1,t->drept);
     }
 }
 
+//Prints a number of spaces.
 void printSpace(int a){
     int i;
     for (i = 0; i < a; i++){
@@ -159,6 +168,11 @@ void printSpace(int a){
     }
 }
 
+/*
+    @param a
+    @param b
+    @return a^b
+*/
 int pow(int a, int b){
     if (!b) return 1;
     int i;
@@ -169,20 +183,56 @@ int pow(int a, int b){
     return a;
 }
 
-void printPrettyTree(TreeNode *t){
-    printf("Printig pretty Tree: \n\n");
-    Map m[100];
-    int mapLength = 0;
-    int levels = 0;
-    int slevel = 0;
-    int level = 0;
-    int counter = 0;
+/*
+    @return The height of the tree.
+*/
+void getTreeLevel(int *lvls,int lvl, TreeNode *t){
+    if (t != NULL){
+        if (lvl > *lvls){
+            *lvls = lvl;
+        }
+        getTreeLevel(lvls,lvl+1,t->stang);
+        getTreeLevel(lvls,lvl+1,t->drept);
+    }
+}
 
-    populateMap(m, &mapLength,0 ,&levels,t);
-    slevel = levels;
+/*
+    Appends empty leaves to some leaves.
+    In order to save the tree in the array Map m[100], in order to print the nodes correctly, I need to add blank spaces
+    to the leaves, that are not at the max height of the tree, so when I print everything, the leaves will have no
+    nodes under them.
+
+    TL:DR; Basically its a hack.
+*/
+void mutilateTree(TreeNode *t, int lvl, int lvls){
+    if (t != NULL){
+        if (lvl < lvls && (t->stang == NULL || t->drept == NULL)){
+            t->stang = leaf((int)' ');
+            t->drept = leaf((int)' ');
+        }
+        mutilateTree(t->stang,lvl+1,lvls);
+        mutilateTree(t->drept,lvl+1,lvls);
+    }
+}
+
+/*
+    I hope it is pretty enough.
+*/
+void printPrettyTree(TreeNode *tree){
+    TreeNode *t = tree; // the tree I am about to mutilate
+    Map m[100]; // the array of the nodes with the respective heights(levels)
+    int mapLength = 0; // the length of the array
+    int levels = 0; // the tree height (longest subtree)
+    int slevel = 0; // a variable, used in printing the nodes in the right order, it decreases from levels to 0
+    int level = 0; // used in the first for loop, that goes throught the levels
+    int counter = 0; // used in the second for loop
+    getTreeLevel(&levels,0,t); // sets the levels(height of the tree)
+    mutilateTree(t,0,levels); // appends empty leaves
+    slevel = levels; // remember, slevel goes from levels to 0
+    populateMap(m, &mapLength, 0, t); // populates m
 
     for (level = 0; level <= levels; level++){
-        bool first = true;
+        bool first = true; // the first space is different from the rest, if it is the first value from the level, it is trated separately
         for (counter = 0; counter < mapLength; counter++){
             if (m[counter].level == level){
                 if (first){
@@ -197,13 +247,18 @@ void printPrettyTree(TreeNode *t){
 
         }
         slevel--;
+
         printf("\n");
     }
     printf("\n\n\n");
 }
 
+/*
+    This builds the tree from the inputfile using stacks(the input is in postfix)
+    @param an inputfile!
+    @return a tree!
+*/
 TreeNode *buildTreeFromFile_Postorder(FILE *file){
-    printf("Building tree...");
     char value = getc(file);
     char scrap = getc(file);
     int input = (int) value;
@@ -230,15 +285,12 @@ TreeNode *buildTreeFromFile_Postorder(FILE *file){
         input = (int)value;
     }
     TreeNode *t = popFromStack();
-    printf(" -DONE\n");
     return t;
 }
 
 int main(){
-    printf("Starting Porgram: \n\n");
     TreeNode *tree;
 
-    //printf("Initializing from File: \n");
     FILE *inputFile = fopen("input.txt","r");
     if (inputFile == NULL){
             printf("FILE == NULL\n");
@@ -250,7 +302,5 @@ int main(){
     fclose(inputFile);
 
     printPrettyTree(tree);
-
-    printf("End of program.");
     return Great_Succes;
 }

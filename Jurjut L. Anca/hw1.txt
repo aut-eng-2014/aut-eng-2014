@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct igrec
+{
+int x;
+struct igrec *next;
+
+}nodet;
+
+nodet *first;
+nodet *last;
+nodet *new1;
+void init()
+{
+    first=(nodet*)malloc(sizeof(nodet));
+    last=(nodet*)malloc(sizeof(nodet));
+    first->x=5;
+    first->next=last;
+    last->x=7;
+    last->next=NULL;
+}
+
+void add()
+{
+    new1=(nodet*)malloc(sizeof(nodet));
+    new1->x=9;
+    new1->next=NULL;
+    if ( last != NULL )
+    last->next=NULL;
+    else
+    first = new1;
+    last = new1;
+    if ( first != NULL )
+    {
+    new1->next=first;
+    first= new1;
+    }
+}
+void show()
+{
+    nodet *t=first;
+    while(t->next=!NULL)
+    {
+        printf("%d",t->x);
+        t=t->next;
+    }
+    printf("%d",last->x);
+}
+
+int main()
+{
+    init();
+    add();
+    show();
+    return 0;
+}

@@ -15,11 +15,49 @@ typedef struct{
 
 TreeNode *root = NULL;
 
+typedef struct{
+    bool print;
+    int value;
+    struct ListNode *prev;
+} ListNode;
+
+ListNode *first;
+
 void printStart(){
     system("CLS");
     system("COLOR A");
     printf("\n\tROBCO INDUSTRIES UNIFIED OPERATING SYSTEM\n\t  COPYRIGHT 2075-2077 ROBCO INDUSTRIES\n\t\t\t-Server 1-\n");
     printf("\t__________________________________________\n");
+}
+
+void clearList(){
+    free(first);
+    first = NULL;
+}
+
+void pushToList(int a, bool ex){
+    if (first == NULL){
+        first->print = ex;
+        first->value = a;
+        first->prev = NULL;
+    }
+    else{
+        ListNode *tempy = (ListNode*) malloc(sizeof(ListNode));
+        tempy->value = a;
+        tempy->print = ex;
+        tempy->prev = first;
+        first = tempy;
+    }
+}
+
+int lengthOfList(){
+    int length = 0;
+    ListNode *tempy = first;
+    while (tempy->prev != NULL){
+        tempy = tempy-> prev;
+        length++;
+    }
+    return length+1;
 }
 
 /*
@@ -171,11 +209,76 @@ bool findNode(int a, bool printStuff){
     }
 }
 
+void getDepth(TreeNode *t, int *d, int lvl){
+    if (t != NULL){
+        if (lvl > *d){
+            *d = lvl;
+        }
+        getDepth(t->stang,d,lvl+1);
+        getDepth(t->drept,d,lvl+1);
+    }
+}
+
+/*
+    This needs some major fixing.
+*/
+void doTheThing(int lvl, int curnt, TreeNode *t){
+    if (t != NULL){
+        if (curnt == lvl){
+            pushToList(t->value,true);
+        }
+        doTheThing(lvl, curnt+1, t->stang);
+        if (lengthOfList() < pow(2,curnt)){
+                pushToList(0,true);
+        }
+        doTheThing(lvl, curnt+1, t->drept);
+        if (lengthOfList() < pow(2,curnt)){
+            pushToList(0,true);
+        }
+        int depth = 0;
+        getDepth(root,&depth,0);
+        if (lengthOfList() == pow(2,depth)){
+            return;
+        }
+    }
+}
+
+void printList(){
+    if (first == NULL){
+        printf("The list is empty.");
+        return;
+    }
+    printf("Printing list: \n");
+    ListNode *tempy = first;
+    while (tempy->prev != NULL){
+        printf("%d ",tempy->value);
+    }
+    printf("%d\n",tempy->value);
+}
+
+void insertLevelFromBST(int lvl){
+    clearList();
+    doTheThing(lvl,0,root);
+}
+
 /*
     I hope it is pretty enough.
 */
-void printPrettyTree(TreeNode *tree){
-    //TODO find a better algotithm
+void printPrettyTree(){
+    if (root == NULL){
+        printf("\n\t[W]: Tree is empty.\n");
+        return;
+    }
+    printf("\nPrinting Pretty Tree: \n");
+    int counter;
+    int depth = 0;
+    printf("Getting depth...\n");
+    getDepth(root,&depth,0);
+    for (counter = 0; counter < depth+1; counter++){
+        printf("counter [%d]\n",counter);
+        insertLevelFromBST(counter);
+        printList();
+    }
 }
 
 /*
@@ -205,7 +308,7 @@ void menu(){
 
         // I keep leaving out the space when inputting stuff...
         if (input[1] != ' '){
-            if (input [0] != 'q'){
+            if (input[0] != 'q' && input[0] != 's'){
                     input[0] = '#';
             }
         }
@@ -215,7 +318,7 @@ void menu(){
             case 'i': addNewNode(atoi(input+2)); break;
             case 'd': deleteNode(atoi(input+2)); break;
             case 'f': findNode(atoi(input+2),true); break;
-            case 's': printPrettyTree(root); break;
+            case 's': printPrettyTree(); break;
             case 'q': return; break; //break not needed, but eh, for looks.
             default: printf("\n\t[W]: Invalid Input!\n"); break;
         }

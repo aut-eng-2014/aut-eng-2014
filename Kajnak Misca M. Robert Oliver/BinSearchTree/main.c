@@ -11,8 +11,6 @@ int main()
     int n;
     char c;
 
-    //root=insertNode(root,10);root=insertNode(root,11);root=insertNode(root,12);root=insertNode(root,20);root=insertNode(root,30);root=insertNode(root,14);
-
     FILE* f;
     f=fopen("input.txt","r");
     if (f==NULL)
@@ -24,21 +22,26 @@ int main()
         {
         case ('i'):
             fscanf(f,"%d",&n);
+            printf("-> i %d\n",n);///these printfs are for demonstration purposes only. They show what could have been the imput
             root=insertNode(root,n);
             break;
         case ('d'):
             fscanf(f,"%d",&n);
+            printf("-> d %d\n",n);
             deleteNode(root,n);
             break;
         case ('f'):
             fscanf(f,"%d",&n);
+            printf("-> f %d\n",n);
             findNode(root,n);
             break;
         case ('s'):
+            printf("-> s\n");
             preorder(root);
             printf("\n");
             break;
         case ('q'):
+            printf("-> q\n");
             return 0;
             break;
         }

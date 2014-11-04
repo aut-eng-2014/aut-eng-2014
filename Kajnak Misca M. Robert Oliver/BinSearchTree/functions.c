@@ -4,31 +4,23 @@ node* insertNode(node* np,int n)///with the number of elements we would use here
 {
     if (np==NULL)
     {
-        //printf("Starting insertion of %d\n",n);
-
-        np=(node*)malloc(sizeof(np));;
+        np=(node*)malloc(sizeof(node));;
 
         np->val=n;
         np->left=NULL;
         np->right=NULL;
-
-        //printf("Inserted: %d\n",n);
     }
     else
     {
-        //printf("Parsing %d\n",np->val);
         if (n<np->val)
         {
-            //printf("Entering to left of %d\n",np->val);
             np->left=insertNode(np->left,n);
         }
         else
         if (n>np->val)
         {
-            //printf("Entering to right of %d\n",np->val);
             np->right=insertNode(np->right,n);
         }
-        //printf("parsed %d\n",np->val);
     }
     return np;
 }
@@ -88,6 +80,14 @@ void deleteNode(node* np,int n)
         {
             if ((np->left==NULL) && (np->right==NULL))
             {
+                if (last->left==np)
+                {
+                    last->left=NULL;
+                }
+                else
+                {
+                    last->right=NULL;
+                }
                 free(np);
                 np=NULL;
                 return;
@@ -95,11 +95,22 @@ void deleteNode(node* np,int n)
             if ((np->left!=NULL) && (np->right!=NULL))
             {
                 node * t=np->left;
+                last=np;///in this particular case, last is not needed for np, but for t
                 while (t->right!=NULL)
                 {
+                    last=t;
                     t=t->right;
                 }
                 np->val=t->val;
+
+                if (last->left==t)
+                {
+                    last->left=NULL;
+                }
+                else
+                {
+                    last->right=NULL;
+                }
                 free(t);
                 t=NULL;
                 return;

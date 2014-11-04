@@ -89,6 +89,7 @@ void deleteNode(node* np,int n)
             if ((np->left==NULL) && (np->right==NULL))
             {
                 free(np);
+                np=NULL;
                 return;
             }
             if ((np->left!=NULL) && (np->right!=NULL))
@@ -100,6 +101,7 @@ void deleteNode(node* np,int n)
                 }
                 np->val=t->val;
                 free(t);
+                t=NULL;
                 return;
             }
             ///the only remaining option is that only one of them is NULL
@@ -107,11 +109,13 @@ void deleteNode(node* np,int n)
             {
                 last->left=(np->left!=NULL?np->left:np->right);///selects the non-NULL child
                 free(np);
+                np=NULL;
             }
             else///np->right
             {
                 last->right=(np->left!=NULL?np->left:np->right);
                 free(np);
+                np=NULL;
             }
         }
     }

@@ -197,6 +197,9 @@ bool findNode(int a, bool printStuff){
     }
 }
 
+/*
+    Returns the longest branch in d, to get the "depth"
+*/
 void getDepth(TreeNode *t, int *d, int lvl){
     if (getExist(t)){
         if (lvl > *d){
@@ -207,21 +210,53 @@ void getDepth(TreeNode *t, int *d, int lvl){
     }
 }
 
-void printLevel(TreeNode *t, int lvl, int l){
-    if (t != NULL){
-        if (t->level == lvl){
-            if (t->exist){
-                    printf("%d ",t->value);
-            }
-            else{
-                printf("H ");
-            }
-        }
-        printLevel(t->stang,lvl,l+1);
-        printLevel(t->drept,lvl,l+1);
+// It prints spaces.
+void printSpaces(int n){
+    int i;
+    for (i = 0; i < n; i++){
+        printf(" ");
     }
 }
 
+/*
+    @param some value a [0..15]
+    @return 2^a
+*/
+int pow(int a){
+    if (!a){
+        return 1;
+    }
+    int i;
+    int answer = 2;
+    for (i = 0; i < a; i++){
+        answer *= 2;
+    }
+    return answer;
+}
+
+/*
+    Prnts all elements in a give height in the BST.
+*/
+void printLevel(TreeNode *t, int lvl, int l, int d){
+    if (t != NULL){
+        if (t->level == lvl){
+            if (t->exist){
+                    printf("%d",t->value);
+            }
+            else{
+                printf(" ");
+            }
+            printSpaces(pow(d-l+1)-1);
+        }
+        printLevel(t->stang,lvl,l+1,d);
+        printLevel(t->drept,lvl,l+1,d);
+    }
+}
+
+/*
+    In order to print the tree the way I want, I have to append some empty leaves,
+    they dont have usefull data, only to be used in printing the tree.
+*/
 void fillTree(TreeNode *t, int l, int dep){
    if (t != NULL){
         if (dep > l){
@@ -241,22 +276,94 @@ void fillTree(TreeNode *t, int l, int dep){
     I hope it is pretty enough.
 */
 void printPrettyTree(){
+    if (root == NULL){
+        printf("\n\t[W]: Tree is empty!");
+    }
     int depth = 0;
     getDepth(root,&depth,0);
     fillTree(root,0,depth);
     int i;
     for (i = 0; i <= depth; i++){
-        printLevel(root, i, 0);
+        printf("\t");
+        printSpaces(pow(depth-i)-2);
+        printLevel(root, i, 0,depth);
         printf("\n");
     }
 }
 
 /*
+    Every node has a level data with it, and when something is deleted,
+    I have to make corrections to the level data of each node.
+*/
+void refreshTree(TreeNode *t, int lvl){
+    if (t != NULL){
+        t->level = lvl;
+        refreshTree(t->stang,lvl+1);
+        refreshTree(t->drept,lvl+1);
+    }
+}
+
+/*
     Deletes a node with the vaue a.
+    This works most of the time, although sometimes, -13's appear out of nowhere... weird.
+    I don't know how to reproduce the problem.
 */
 void deleteNode(int a){
     if(findNode(a,false)){
-        //TODO deletion
+        TreeNode *tempy = root;
+        TreeNode *temp = tempy; // this will store the parent of tempy
+        // get to the node we need, and also store the parent
+        while(tempy->value !=  a){
+            if (tempy->value > a){
+                temp = tempy;
+                tempy = tempy->stang;
+            }
+            else if (tempy->value < a){
+                temp = tempy;
+                tempy = tempy->drept;
+            }
+        }
+        TreeNode *deadNodeWalking = tempy; // this node will be deleted soon
+        TreeNode *surviver = deadNodeWalking; // this is the parent of the deadNodeWalking node
+        while (deadNodeWalking->drept != NULL){
+            surviver = deadNodeWalking;
+            deadNodeWalking = deadNodeWalking->drept;
+        }
+        if (deadNodeWalking == tempy){
+            while(deadNodeWalking->stang != NULL){
+                surviver = deadNodeWalking;
+                deadNodeWalking = deadNodeWalking->stang;
+            }
+            if (deadNodeWalking == tempy){
+                if (temp == deadNodeWalking){
+                    // The only possible explanation, that this is the root!
+                    root = NULL;
+                    printf("\n\tRoot deleted.\n");
+                    return;
+                }
+                else{
+                    if (temp->stang == deadNodeWalking){
+                        temp->stang = NULL;
+                    }
+                    else{
+                        temp->drept = NULL;
+                    }
+                }
+                refreshTree(root,0);
+                printf("\n\tNode deleted.\n");
+                return;
+            }
+        }
+        tempy->value = deadNodeWalking->value;
+        if (surviver->stang == deadNodeWalking){
+            surviver->stang = NULL;
+        }
+        else{
+            surviver->drept = NULL;
+        }
+        printf("\n\tNode deleted.\n");
+        refreshTree(root,0);
+        return;
     }
     else{
         printf("\n\t[W]: Deletion Failed: BST does not contain that value.\n");
@@ -270,19 +377,16 @@ void menu(){
     bool notBored = true;
     while(notBored){
         printf("\n\tI. Insert D. Delete F. Find S. Show Q. Quit\n");
-
         printf("\t> ");
         char input[7] = "";
         gets(input);
         input[0] = tolower(input[0]);
-
         // I keep leaving out the space when inputting stuff...
         if (input[1] != ' '){
             if (input[0] != 'q' && input[0] != 's'){
                     input[0] = '#';
             }
         }
-
         // input parameter = atoi(input+2)
         switch(input[0]){
             case 'i': addNewNode(atoi(input+2)); break;

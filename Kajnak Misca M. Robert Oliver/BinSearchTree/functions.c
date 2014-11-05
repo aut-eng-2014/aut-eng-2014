@@ -209,6 +209,18 @@ int findAllNodesThatAreOfDepthDepth(node * np, int * a, int d,int *n)
         }
         cd--;
     }
+    else
+    {
+        if (cd+1<d)
+        {
+            int i;
+            for (i=0;i<(d-cd-1)*2;i++)
+            {
+                a[*n]=INT_MIN;
+                (*n)++;
+            }
+        }
+    }
 
     return *n;
 }

@@ -9,19 +9,13 @@ typedef enum{
 
 typedef struct{
     int value;
+    int level;
+    bool exist;
     struct TreeNode *stang;
     struct TreeNode *drept;
 } TreeNode;
 
 TreeNode *root = NULL;
-
-typedef struct{
-    bool print;
-    int value;
-    struct ListNode *prev;
-} ListNode;
-
-ListNode *first;
 
 void printStart(){
     system("CLS");
@@ -30,42 +24,24 @@ void printStart(){
     printf("\t__________________________________________\n");
 }
 
-void clearList(){
-    free(first);
-    first = NULL;
-}
-
-void pushToList(int a, bool ex){
-    if (first == NULL){
-        first->print = ex;
-        first->value = a;
-        first->prev = NULL;
-    }
-    else{
-        ListNode *tempy = (ListNode*) malloc(sizeof(ListNode));
-        tempy->value = a;
-        tempy->print = ex;
-        tempy->prev = first;
-        first = tempy;
-    }
-}
-
-int lengthOfList(){
-    int length = 0;
-    ListNode *tempy = first;
-    while (tempy->prev != NULL){
-        tempy = tempy-> prev;
-        length++;
-    }
-    return length+1;
-}
-
 /*
     @returns a lead with the with the value of a
 */
-TreeNode *createLeaf(int a){
+TreeNode *createLeaf(int a, int lvl){
     TreeNode *tempy = (TreeNode*) malloc(sizeof(TreeNode));
     tempy->value = a;
+    tempy->level = lvl;
+    tempy->exist = true;
+    tempy->stang = NULL;
+    tempy->drept = NULL;
+    return tempy;
+}
+
+TreeNode *createEmptyLeaf(int lvl){
+    TreeNode *tempy = (TreeNode*) malloc(sizeof(TreeNode));
+    tempy->value = -13;
+    tempy->level = lvl;
+    tempy->exist = false;
     tempy->stang = NULL;
     tempy->drept = NULL;
     return tempy;
@@ -92,6 +68,16 @@ TreeNode *getRight(TreeNode *t){
     return t->drept;
 }
 
+bool getExist(TreeNode *t){
+    if (t == NULL){
+        return false;
+    }
+    if (!(t->exist)){
+        return false;
+    }
+    return true;
+}
+
 //===============================================
 
 /*
@@ -103,10 +89,12 @@ void addNewNode(int a){
         root->value = a;
         root->stang = NULL;
         root->drept = NULL;
+        root->level = 0;
+        root->exist = true;
         return;
     }
     else{
-        short level = 0;
+        short level = 1;
         TreeNode *temp = root;
         while(temp != NULL){
             if (level >= MAXDEPTH){
@@ -114,8 +102,8 @@ void addNewNode(int a){
             }
 
             if (a > temp->value){
-                if (temp->drept == NULL){
-                    temp->drept = createLeaf(a);
+                if (!getExist(temp->drept)){
+                    temp->drept = createLeaf(a,level);
                     return;
                 }
                 else{
@@ -124,8 +112,8 @@ void addNewNode(int a){
                 }
             }
             else if(a < temp->value){
-                    if (temp->stang == NULL){
-                        temp->stang = createLeaf(a);
+                    if (!getExist(temp->stang)){
+                        temp->stang = createLeaf(a,level);
                         return;
                     }
                     else{
@@ -148,7 +136,7 @@ void addNewNode(int a){
     @param printStuff if true prints messages, if false it doesn't
 */
 bool findNode(int a, bool printStuff){
-    if (root == NULL){
+    if (!getExist(root)){
         if (printStuff){
             printf("\n\t[W]: Search Failed: The BST has no elements!\n");
         }
@@ -157,10 +145,10 @@ bool findNode(int a, bool printStuff){
     else if (root->value == a){
         if (printStuff){
             printf("\n\tNode Found: RootNode");
-            if (root->stang != NULL){
+            if (getExist(root->stang)){
                 printf(", left node: %d",getValue(root->stang));
             }
-            if (root->drept != NULL){
+            if (getExist(root->drept)){
                 printf(", right node: %d",getValue(root->drept));
             }
             printf("\n");
@@ -169,9 +157,9 @@ bool findNode(int a, bool printStuff){
     }
     else{
         TreeNode *temp = root;
-        while(temp != NULL){
+        while(getExist(temp)){
             if (a < temp->value){
-                if (temp->stang == NULL){
+                if (!getExist(temp->stang)){
                     if (printStuff){
                         printf("\n\tBST does not contain that value.\n");
                     }
@@ -182,7 +170,7 @@ bool findNode(int a, bool printStuff){
                 }
             }
             else if (a > temp->value){
-                if (temp->drept == NULL){
+                if (!getExist(temp->drept)){
                     if (printStuff){
                         printf("\n\tBST does not contain that value.\n");
                     }
@@ -194,11 +182,11 @@ bool findNode(int a, bool printStuff){
             }
             else{
                 if (printStuff){
-                    printf("\n\tNode Found");
-                    if (temp->stang != NULL){
+                    printf("\n\tNode Found at Level %d",temp->level);
+                    if (getExist(temp->stang)){
                         printf(", left node: %d",getValue(temp->stang));
                     }
-                    if (temp->drept != NULL){
+                    if (getExist(temp->drept)){
                         printf(", right node: %d",getValue(temp->drept));
                     }
                     printf("\n");
@@ -210,7 +198,7 @@ bool findNode(int a, bool printStuff){
 }
 
 void getDepth(TreeNode *t, int *d, int lvl){
-    if (t != NULL){
+    if (getExist(t)){
         if (lvl > *d){
             *d = lvl;
         }
@@ -219,65 +207,47 @@ void getDepth(TreeNode *t, int *d, int lvl){
     }
 }
 
-/*
-    This needs some major fixing.
-*/
-void doTheThing(int lvl, int curnt, TreeNode *t){
+void printLevel(TreeNode *t, int lvl, int l){
     if (t != NULL){
-        if (curnt == lvl){
-            pushToList(t->value,true);
+        if (t->level == lvl){
+            if (t->exist){
+                    printf("%d ",t->value);
+            }
+            else{
+                printf("H ");
+            }
         }
-        doTheThing(lvl, curnt+1, t->stang);
-        if (lengthOfList() < pow(2,curnt)){
-                pushToList(0,true);
-        }
-        doTheThing(lvl, curnt+1, t->drept);
-        if (lengthOfList() < pow(2,curnt)){
-            pushToList(0,true);
-        }
-        int depth = 0;
-        getDepth(root,&depth,0);
-        if (lengthOfList() == pow(2,depth)){
-            return;
-        }
+        printLevel(t->stang,lvl,l+1);
+        printLevel(t->drept,lvl,l+1);
     }
 }
 
-void printList(){
-    if (first == NULL){
-        printf("The list is empty.");
-        return;
-    }
-    printf("Printing list: \n");
-    ListNode *tempy = first;
-    while (tempy->prev != NULL){
-        printf("%d ",tempy->value);
-    }
-    printf("%d\n",tempy->value);
-}
-
-void insertLevelFromBST(int lvl){
-    clearList();
-    doTheThing(lvl,0,root);
+void fillTree(TreeNode *t, int l, int dep){
+   if (t != NULL){
+        if (dep > l){
+            if (t->stang == NULL){
+                t->stang = createEmptyLeaf(l+1);
+            }
+            if (t->drept == NULL){
+                t->drept = createEmptyLeaf(l+1);
+            }
+        }
+        fillTree(t->stang,l+1,dep);
+        fillTree(t->drept,l+1,dep);
+   }
 }
 
 /*
     I hope it is pretty enough.
 */
 void printPrettyTree(){
-    if (root == NULL){
-        printf("\n\t[W]: Tree is empty.\n");
-        return;
-    }
-    printf("\nPrinting Pretty Tree: \n");
-    int counter;
     int depth = 0;
-    printf("Getting depth...\n");
     getDepth(root,&depth,0);
-    for (counter = 0; counter < depth+1; counter++){
-        printf("counter [%d]\n",counter);
-        insertLevelFromBST(counter);
-        printList();
+    fillTree(root,0,depth);
+    int i;
+    for (i = 0; i <= depth; i++){
+        printLevel(root, i, 0);
+        printf("\n");
     }
 }
 

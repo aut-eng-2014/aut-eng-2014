@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1415226039 source:c:\users\cornelius\desktop\dsa teme\tema4.1\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+

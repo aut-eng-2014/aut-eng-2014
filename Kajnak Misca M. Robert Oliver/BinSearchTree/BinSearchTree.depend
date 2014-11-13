@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1415126253 source:c:\cppk\binsearchtree\main.c
+	"functions.h"
+	<stdio.h>
+	<stdlib.h>
+
+1415126082 source:c:\cppk\binsearchtree\functions.c
+	"functions.h"
+
+1415125640 c:\cppk\binsearchtree\functions.h
+	<stdio.h>
+	<stdlib.h>
+

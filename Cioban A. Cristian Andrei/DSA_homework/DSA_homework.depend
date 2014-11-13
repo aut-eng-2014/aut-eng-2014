@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1415113453 source:e:\projects\workspace codeblocks\dsa_homework\main.c
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	"functions_binsearchtree.h"
+	"menu_options.h"
+
+1415113536 e:\projects\workspace codeblocks\dsa_homework\functions_binsearchtree.h
+	<stdlib.h>
+	<stdio.h>
+
+1415113592 e:\projects\workspace codeblocks\dsa_homework\menu_options.h
+	<stdlib.h>
+	<stdio.h>
+
+1415113565 source:e:\projects\workspace codeblocks\dsa_homework\menu_options.c
+	"functions_binsearchtree.h"
+	"menu_options.h"
+

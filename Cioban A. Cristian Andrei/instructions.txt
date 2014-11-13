@@ -1,1 +1,2 @@
-- play nice
+- play nice 
+hashcat

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define MAX 32000
 #define CHARS 20
@@ -179,6 +180,7 @@ int main(){
     hashF = &hashFunction_1;
 
     char a[CHARS] = "NULL";
+    long start,finish;
 
     while(1){
         printf("1. Insert\n2. Search\n3. List all\n4. Hash Function\n5. Fill With Random Strings\n6. Clear Table\nOther: Exit\n\n");
@@ -220,12 +222,15 @@ int main(){
             case 5:
                 printf("\tTesting: \nHow many elements to add? ");
                 scanf("%d",&i);
+                start = clock();
                 for (j = 0; j < i; j++){
                     randomString(a);
                     Table[hashF(a)] = insertValue(Table[hashF(a)],a);
                 }
+                finish = clock();
                 printf("\n\tLongest thingy: %d\n",getLongestThingy(Table));
                 printf("\tAverage thingy: %f\n\n",getAverageThingy(Table));
+                printf("\tClocks? : %d",finish - start); // I think this works... I have no idea what is going on tho...
             break;
             case 6:
                 printf("Clearing Table...");

@@ -20,7 +20,7 @@ node *insertValue(node *n, char in[CHARS]){
     }
     else{
         node *temp = (node*) malloc(sizeof(node));
-        strcpy(n->value,in); //temp->value = in;
+        strcpy(temp->value,in); //temp->value = in;
         temp->next = n;
         n = temp;
     }

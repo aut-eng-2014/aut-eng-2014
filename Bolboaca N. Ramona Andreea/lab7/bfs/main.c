@@ -45,7 +45,7 @@ void showQueue(Node *froont)
 
     else
     {
-        printf("\nThe stack is empty!\n");
+        printf("\nThe queue is empty!\n");
     }
 }
 

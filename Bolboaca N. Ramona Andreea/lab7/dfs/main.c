@@ -97,7 +97,7 @@ void deleteStack(Node **top, Node **bottom)
     *bottom=NULL;
 }
 
-void dfs(int n, int s, int a[n][n])
+void dfs(int n, int s, int **n)
 /** n-> number of nodes
     s-> first node **/
 {
@@ -178,11 +178,14 @@ int main()
 {
     int n,j,i;
     scanf("%d",&n);
-    int a[n][n];
+    int **a=(int**)malloc(n*sizeof(int));
     for(i=0;i<n;i++)
     {
+        a[i]=(int*)malloc(n*sizeof(int));
         for(j=0;j<n;j++)
+        {
             scanf("%d",&a[i][j]);
+        }
     }
 
     dfs(n,0,a);

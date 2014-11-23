@@ -93,7 +93,7 @@ void deleteQueue(Node **froont, Node **rear)
     *rear=NULL;
 }
 
-void bfs(int n, int s, int a[n][n])
+void bfs(int n, int s, int **a)
 /** n-> number of nodes
     s-> first node **/
 {
@@ -156,13 +156,17 @@ int main()
 {
     int n,j,i;
     scanf("%d",&n);
-    int a[n][n];
+    int **a=(int**)malloc(n*sizeof(int));
     for(i=0;i<n;i++)
     {
+        a[i]=(int*)malloc(n*sizeof(int));
         for(j=0;j<n;j++)
+        {
             scanf("%d",&a[i][j]);
+        }
     }
 
     bfs(n,0,a);
+
     return 0;
 }

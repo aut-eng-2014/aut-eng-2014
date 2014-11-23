@@ -97,7 +97,7 @@ void deleteStack(Node **top, Node **bottom)
     *bottom=NULL;
 }
 
-void dfs(int n, int s, int **n)
+void dfs(int n, int s, int **a)
 /** n-> number of nodes
     s-> first node **/
 {

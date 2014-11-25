@@ -4,17 +4,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef enum{
+    false,
+    true
+} bool;
+
 typedef struct{
     int value;
     struct List *next;
 } List;
 
 void NQ(List**,int);
-void DQ(List**);
+int DQ(List**);
 void printQueue(List**);
 
 void push(List**,int);
-void pop(List**);
+int pop(List**);
 void printStack(List**);
 
 #endif

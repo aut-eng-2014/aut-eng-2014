@@ -16,10 +16,11 @@ void NQ(List **Queue,int in){
     }
 }
 
-void DQ(List **Queue){
+int DQ(List **Queue){
 
     if (*Queue == NULL){
         printf("\n[W]: The queue has no elements.\n");
+        return -1;
     }
     else{
         List *temp = *Queue;
@@ -30,7 +31,7 @@ void DQ(List **Queue){
         }
 
         tempsFather->next = NULL;
-        free(temp); // Does this solve the memory leak, or the garbage collector does this already?
+        return temp->value;
     }
 }
 
@@ -64,12 +65,15 @@ void push(List **Stack, int in){
     }
 }
 
-void pop(List **Stack){
+int pop(List **Stack){
     if (*Stack == NULL){
         printf("\n[W]: The stack is empty.");
+        return -1;
     }
     else{
+        List *temporaryList = *Stack;
         *Stack = (*Stack)->next; //Memory leak.
+        return temporaryList->next;
     }
 }
 
@@ -79,7 +83,7 @@ void printStack(List **Stack){
         printf("VOID\n");
         return;
     }
-    List *temp = Stack;
+    List *temp = *Stack;
     while (temp != NULL){
         printf("%d ",temp->value);
         temp = temp->next;
@@ -88,3 +92,12 @@ void printStack(List **Stack){
 }
 
 //============================
+
+bool isEmpty(List **l){
+    if (*l == NULL){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

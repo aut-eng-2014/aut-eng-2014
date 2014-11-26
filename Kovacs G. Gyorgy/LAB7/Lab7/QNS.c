@@ -1,6 +1,11 @@
+
 #include "QNS.h"
 
 //===========Queue============
+
+List* initQueue(){
+    return NULL;
+}
 
 void NQ(List **Queue,int in){
     if (*Queue == NULL){
@@ -22,6 +27,11 @@ int DQ(List **Queue){
         printf("\n[W]: The queue has no elements.\n");
         return -1;
     }
+    else if((*Queue)->next == NULL){
+        int tempNum = (*Queue)->value;
+        *Queue = NULL;
+        return tempNum;
+    }
     else{
         List *temp = *Queue;
         List *tempsFather = temp;
@@ -35,10 +45,10 @@ int DQ(List **Queue){
     }
 }
 
-void printQueue( List **Queue){
+void printQueue(List **Queue){
     printf("Printing elements: [ ");
-    if (*Queue == NULL){
-        printf("VOID\n");
+    if ((*Queue) == NULL){
+        printf("VOID ].\n");
         return;
     }
     List *temp = *Queue;
@@ -50,6 +60,10 @@ void printQueue( List **Queue){
 }
 
 //===========Stack============
+
+List*  initStack(){
+    return NULL;
+}
 
 void push(List **Stack, int in){
     if (*Stack == NULL){
@@ -71,9 +85,9 @@ int pop(List **Stack){
         return -1;
     }
     else{
-        List *temporaryList = *Stack;
+        int tempNum = (*Stack)->value;
         *Stack = (*Stack)->next; //Memory leak.
-        return temporaryList->next;
+        return tempNum;
     }
 }
 

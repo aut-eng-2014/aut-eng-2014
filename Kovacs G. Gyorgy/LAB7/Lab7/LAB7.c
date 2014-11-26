@@ -1,21 +1,13 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#include "graph.h"
 
-#include <stdio.h>
-#include "QNS.h"
+int main(){
+    int Graph[GRAPHSIZE][GRAPHSIZE];
+    clearGraph(Graph);
+    inputGraph(Graph);
 
-#define GRAPHSIZE 5
+    printGraphMatrix(Graph);
 
-typedef enum{
-        UNVISITED,
-        VISITED
-} VisitMark;
-
-void clearGraph(int[GRAPHSIZE][GRAPHSIZE]);
-void inputGraph(int[GRAPHSIZE][GRAPHSIZE]);
-
-void printGraphMatrix(int[GRAPHSIZE][GRAPHSIZE]);
-void traverseDFT(int[GRAPHSIZE][GRAPHSIZE]);
-void traverseBFT(int[GRAPHSIZE][GRAPHSIZE]);
-
-#endif // GRAPH_H
+    traverseBFT(Graph);
+    traverseDFT(Graph);
+    return 0;
+}

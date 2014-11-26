@@ -14,12 +14,16 @@ typedef struct{
     struct List *next;
 } List;
 
+List* initQueue(void);
 void NQ(List**,int);
 int DQ(List**);
 void printQueue(List**);
 
+List* initStack(void);
 void push(List**,int);
 int pop(List**);
 void printStack(List**);
+
+bool isEmpty(List**);
 
 #endif

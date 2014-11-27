@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1417017645 source:c:\users\razvan\desktop\sda\tema3\graph\main.c
+	<stdio.h>
+	<stdlib.h>
+	"header.h"
+
+1417017603 source:c:\users\razvan\desktop\sda\tema3\graph\functions.c
+	<stdio.h>
+	<stdlib.h>
+	"header.h"
+	"Simplelinkedlist.h"
+
+1417017666 c:\users\razvan\desktop\sda\tema3\graph\header.h
+
+1416948279 source:c:\users\razvan\desktop\sda\tema3\graph\stack.c
+	<stdio.h>
+	<stdlib.h>
+	"Simplelinkedlist.h"
+
+1416947854 c:\users\razvan\desktop\sda\tema3\graph\stack.h
+
+1417003445 source:c:\users\razvan\desktop\sda\tema3\graph\queue.c
+	<stdlib.h>
+	<stdio.h>
+	"Simplelinkedlist.h"
+
+1416946194 c:\users\razvan\desktop\sda\tema3\graph\queue.h
+
+1417003460 c:\users\razvan\desktop\sda\tema3\graph\simplelinkedlist.h
+

@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1415013812 source:d:\code blocks\cbt\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1415287009 source:c:\cppk\alex\cbt\main.c
+	<stdio.h>
+	<stdlib.h>
+

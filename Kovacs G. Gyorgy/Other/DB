@@ -1,0 +1,7 @@
+DB stuff
+
+SELECT S.Name, s.Surname, s.Group_Id
+FROM Students S, Teachers T, Marks M
+WHERE S.Student_Id = M.Student_Id
+AND T.Teacher_Id = M.Teacher_Id
+AND T.Name = 'Popescu'

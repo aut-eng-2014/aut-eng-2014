@@ -1,6 +1,10 @@
 #include "stack.h"
+#include "limits.h"
 
 ///BFS-Queue, DFS - Stack
+///Kruskal
+///Floyd Warshaw
+
 
 void purge(char *a,int n)
 {
@@ -91,30 +95,57 @@ void DFSrec(int **a,int n, int startNode, char *boolArray,stac ** visitedList)
         }
 }
 
+typedef struct edgelist
+{
+    int first,next;
+    int val;
+} edgeList;
+edgeList* Prims(int * edgeSequence, int ** graph, int maxElement, int startElement);
+
+edgeList* Prims(int * edgeSequence, int ** a, int n, int se)
+{
+    char b[n];
+    purge(b,n);
+
+    edgeList *el=(edgeList*)malloc(n*sizeof(edgeList));
+    int edgeSequenceIndex=0;
+    edgeSequence[edgeSequenceIndex]=se;///Autocomplete FTW
+    b[se]=1;
+    edgeSequenceIndex++;
+    /**"Venit Lumen Glorium"
+    "Venit Sancte Spiritus"
+}   "Halleluia"*/
+    while (!isAllVisited(b,n))
+    {
+        int i;
+        int j;
+        int locMin=INT_MAX,locMini=INT_MAX;
+        for (i=0;i<edgeSequenceIndex;i++ )
+        {
+            se=edgeSequence[i];
+            for (j=0;j<n;j++)
+            {
+                if (((a[se][j]<locMin)&&a[se][j]>0) && (!b[j]))
+                {
+                locMin=a[se][j];
+                locMini=j;
+                }
+            }
+        }
+        el[edgeSequenceIndex].first=se;
+        el[edgeSequenceIndex].next=locMini;
+        el[edgeSequenceIndex].val=locMin;
+        edgeSequence[edgeSequenceIndex]=locMini;
+        edgeSequenceIndex++;
+        b[locMini]=1;
+    }
+    return el;
+}
+
 int main()
 {
     stac *s=NULL;
     printf("---Search algorithms in graphs---");
-    /**test*/
-    /*stPush(&s,2);
-    stPush(&s,5);
-    stPush(&s,10);
-    printf("%d | ",stPop(&s));
-    printf("%d | ",stPop(&s));
-    printf("%d \n",stPop(&s));
-
-    stPush(&s,2);
-    stPush(&s,5);
-    stPush(&s,10);
-    printf("%d | ",deQ(&s));
-    printf("%d | ",deQ(&s));
-    printf("%d | ",deQ(&s));
-
-    printf("%d \n",stPop(&s));*/
-   // printf("%d|%d|%d",stPop(s),stPop(s),stPop(s));///ot goes inversely
-/***tests over*/
-
-
 
 /**Fileread*/
     FILE *f;
@@ -188,6 +219,19 @@ int main()
     }
     printf("\n");
     /***/
+
+    printf("\nPrim's algorithm:\n");
+    int edges[n];
+    edgeList* el=Prims(edges,a,n,6);
+    for (i=0;i<n;i++)
+    {
+        printf("%c | ",edges[i]+97);
+    }
+    printf("\n");
+    for (i=1;i<n;i++)
+    {
+        printf("%c%c=%d| ",el[i].first+97,el[i].next+97,el[i].val);
+    }
 
     printf("\n");
     return 0;

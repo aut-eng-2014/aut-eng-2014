@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1416695470 source:c:\cppk\graphs\main.c
+1417085937 source:c:\cppk\graphs\main.c
 	"stack.h"
+	"limits.h"
 
 1416687353 c:\cppk\graphs\stack.h
 	<stdio.h>

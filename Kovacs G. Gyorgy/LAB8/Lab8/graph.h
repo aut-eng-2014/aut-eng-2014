@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "QNS.h"
 
-#define GRAPHSIZE 5
+#define GRAPHSIZE 7
 
 typedef enum{
         UNVISITED,

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1417642111 source:d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab9\homework\lab9.c
+	"graph.h"
+
+1417642111 d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab9\homework\graph.h
+	<stdio.h>
+	"QNS.h"
+
+1417642111 d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab9\homework\qns.h
+	<stdlib.h>
+	<stdio.h>
+
+1417642111 source:d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab9\homework\qns.c
+	"QNS.h"
+

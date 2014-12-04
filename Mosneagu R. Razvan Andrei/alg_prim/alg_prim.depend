@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1417558789 source:d:\programs\alg_prim\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1417557301 source:d:\programs\alg_prim\cost.c
+

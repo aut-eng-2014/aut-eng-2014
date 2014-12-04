@@ -1,24 +1,26 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef GRAPH_H_INCLUDED
+#define GRAPH_H_INCLUDED
 
-#include <stdio.h>
-#include "QNS.h"
 
-#define GRAPHSIZE 7
+   /*  Functia calculeaza produsul matricelor a[n][m]
+	si b[m][p] de tip double rezultand matricea c[n[][p] */
+    #define NMAX 10
 
-typedef enum{
-        UNVISITED,
-        VISITED
-} VisitMark;
+    void produs(int n,int m,int p,double a[NMAX][NMAX],
+		double b[NMAX][NMAX],double c[NMAX][NMAX])
+    /* Calculul produsului c=a*b) */
+    {
+       int i,j,k;
+       double s;
+       for(i=0;i<n;i++)
+	 for(j=0;j<p;j++)
+	   {
+                 s=0.0;
+	     for(k=0;k<m;k++)
+	       s=s+a[i][k]*b[k][j];
+	     c[i][j]=s;
+	   };
+    }
 
-void clearGraph(int[GRAPHSIZE][GRAPHSIZE]); // W + S
-void printGraphMatrix(int[GRAPHSIZE][GRAPHSIZE]); // W + S
 
-void inputGraph(int[GRAPHSIZE][GRAPHSIZE]); // S
-void traverseDFT(int[GRAPHSIZE][GRAPHSIZE]); // S
-void traverseBFT(int[GRAPHSIZE][GRAPHSIZE]); // S
-
-void inputWGraph(int[GRAPHSIZE][GRAPHSIZE]);  // W
-void traversePrim(int[GRAPHSIZE][GRAPHSIZE]); // W
-
-#endif // GRAPH_H
+#endif // GRAPH_H_INCLUDED

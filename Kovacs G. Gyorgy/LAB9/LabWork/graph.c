@@ -17,12 +17,14 @@ void inputGraph(int g[GRAPHSIZE][GRAPHSIZE]){
     scanf("%d",&numberOfEdges);
 
     int i;
-    int a,b;
+    char a,b;
     for (i = 0; i < numberOfEdges; i++){
         printf("\t%d.\n\tNode 1: ",i + 1);
         scanf("%d",&a);
+        system("pause");
         printf("\tNode 2: ");
         scanf("%d",&b);
+        system("pause");
 
         g[a][b] = 1;
         g[b][a] = 1;
@@ -175,4 +177,52 @@ void traversePrim(int g[GRAPHSIZE][GRAPHSIZE]){
             }
         }
     }
+}
+
+#define INF 30000 // Close enough
+
+void bored(){
+    printf("bored ");
+    bored();
+}
+
+void dijkstra(int g[GRAPHSIZE][GRAPHSIZE]){
+    VisitMark visited[GRAPHSIZE];
+    int distance[GRAPHSIZE];
+    int i,j;
+    for (i = 0; i < GRAPHSIZE; i++){
+        visited[i] = UNVISITED;
+        distance[i] = INF;
+    }
+
+    printf("\n\tStarting Node: ");
+    int startingNode = 0;
+    scanf("%d",&startingNode);
+
+    visited[startingNode] = VISITED;
+    distance[startingNode] = 0;
+    int temp = startingNode;
+
+    for (i = 0; i < GRAPHSIZE; i++){
+        for (j = 0; j < GRAPHSIZE; j++){
+            if (g[j][temp] != INF){
+                if (distance[j] > distance[temp] + g[temp][j]){
+                    distance[j] = g[j][temp] + distance[temp];
+
+                }
+            }
+        }
+        for (j = 0; j < GRAPHSIZE; j++){
+            if (visited[j] == UNVISITED){
+                temp = j;
+                visited[j] = VISITED;
+                break;
+            }
+        }
+    }
+    printf("\n\tSucces!!!\n\tBehold the distances vector: [ ");
+    for (i = 0; i < GRAPHSIZE; i++){
+        printf("%d ",distance[i]);
+    }
+    printf("]\n\tYou are free to worship me now.");
 }

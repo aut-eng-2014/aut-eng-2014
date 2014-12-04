@@ -11,6 +11,8 @@ typedef enum{
         VISITED
 } VisitMark;
 
+void bored(void);
+
 void clearGraph(int[GRAPHSIZE][GRAPHSIZE]); // W + S
 void printGraphMatrix(int[GRAPHSIZE][GRAPHSIZE]); // W + S
 
@@ -20,5 +22,6 @@ void traverseBFT(int[GRAPHSIZE][GRAPHSIZE]); // S
 
 void inputWGraph(int[GRAPHSIZE][GRAPHSIZE]);  // W
 void traversePrim(int[GRAPHSIZE][GRAPHSIZE]); // W
+void dijkstra(int[GRAPHSIZE][GRAPHSIZE]); // W
 
 #endif // GRAPH_H

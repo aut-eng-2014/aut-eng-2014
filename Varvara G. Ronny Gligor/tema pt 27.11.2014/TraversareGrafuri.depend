@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1417049075 source:c:\users\aabelh\desktop\sda\lab8\traversaregrafuri\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1417049076 source:c:\users\cornelius\desktop\lab8\traversaregrafuri\main.c
+	<stdio.h>
+	<stdlib.h>
+

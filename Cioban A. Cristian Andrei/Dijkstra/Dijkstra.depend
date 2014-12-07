@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1417939334 source:e:\projects\workspace codeblocks\dijkstra\main.c
+	"dijkstra.h"
+
+1417939379 e:\projects\workspace codeblocks\dijkstra\dijkstra.h
+	<stdio.h>
+	<stdlib.h>
+

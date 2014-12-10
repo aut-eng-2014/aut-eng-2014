@@ -15,6 +15,22 @@ typedef struct edgelist
     int val;
 } edgeList;
 
-edgeList* Prims(int * edgeSequence, int ** graph, int maxElement, int startElement);
+edgeList* Prims(int * edgeSequence, int ** graph, int graphSize, int startElement);
 
+typedef struct singlyLinkedList
+{
+    struct singlyLinkedList* next;
+    int val;
+} sll;
+
+typedef struct pth
+{
+    int totalDistance;
+    int vCount;
+
+    sll *itrator,*first;///vertexes is correct as well
+} path;
+
+
+int* Dijskra(int**graph,int graphSize,int startElement);///returns the length vector
 #endif // FUNCTIONS4GRAPHS_H_INCLUDED

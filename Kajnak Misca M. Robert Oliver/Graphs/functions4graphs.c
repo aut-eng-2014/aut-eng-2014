@@ -20,7 +20,7 @@ char isAllVisited(char *a,int n)
 
 int * BFS(int **a,int n,int startNode)
 {
-    char b[n];///visited bool array
+    char *b=(char*)malloc(n*sizeof(char));///visited bool array
     purge(b,n);
     int j=startNode-1;
     stac *s=NULL;
@@ -50,7 +50,7 @@ int * BFS(int **a,int n,int startNode)
 
 stac *DFS(int **a,int n,int startNode)
 {
-    char b[n];///visited bool array
+    char *b=(char*)malloc(n*sizeof(char));///visited bool array
     purge(b,n);
     int j=startNode-1;
     stac *s=NULL,*v=NULL;
@@ -92,7 +92,7 @@ void DFSrec(int **a,int n, int startNode, char *boolArray,stac ** visitedList)
 
 edgeList* Prims(int * edgeSequence, int ** a, int n, int se)
 {
-    char b[n];
+    char *b=(char*)malloc(n*sizeof(char));///visited bool array
     purge(b,n);
 
     edgeList *el=(edgeList*)malloc(n*sizeof(edgeList));
@@ -100,9 +100,7 @@ edgeList* Prims(int * edgeSequence, int ** a, int n, int se)
     edgeSequence[edgeSequenceIndex]=se;///Autocomplete FTW
     b[se]=1;
     edgeSequenceIndex++;
-    /**"Venit Lumen Glorium"
-    "Venit Sancte Spiritus"
-}   "Halleluia"*/
+
     while (!isAllVisited(b,n))
     {
         int i;
@@ -128,4 +126,47 @@ edgeList* Prims(int * edgeSequence, int ** a, int n, int se)
         b[locMini]=1;
     }
     return el;
+}
+
+int findMinIndex(int *a,char *b,int n)///returns the index if the smallest element
+{
+    int t=INT_MAX,index=0;
+
+    int j;
+    for (j=0;j<n;j++)
+    {
+        if ((!b[j]) && (a[j]<t))
+        {
+            t=a[j];
+            index=j;
+        }
+    }
+    return index;
+}
+
+int* Dijskra(int ** a, int n, int se)
+{
+    int* da=(int*)malloc(n*sizeof(int));///distancearray
+    char *b=(char*)malloc(n*sizeof(char));///"bool" vector for visited elements
+    purge(b,n);
+    int i,j;///iterators
+    for (i=0;i<n;i++)
+        da[i]=INT_MAX;
+    da[se]=0;
+
+    for (i=0;i<n;i++)
+    {
+        se=findMinIndex(da,b,n);
+        b[se]=1;
+
+        for (j=0;j<n;j++)
+        {
+            if ((a[se][j]) && (!b[j]) && (da[j]>a[se][j]+da[se]))///is neighbour && not visited && dist smaller than current one
+            {
+                da[j]=a[se][j]+da[se];
+            }
+        }
+    }
+
+    return da;
 }

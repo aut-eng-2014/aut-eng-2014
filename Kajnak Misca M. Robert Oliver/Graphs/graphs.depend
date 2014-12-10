@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1417087880 source:c:\cppk\graphs\main.c
+1417868509 source:c:\cppk\graphs\main.c
 	"stack.h"
 	"functions4graphs.h"
 	"limits.h"
@@ -11,10 +11,17 @@
 1416687029 source:c:\cppk\graphs\stack.c
 	"stack.h"
 
-1417087870 source:c:\cppk\graphs\functions4graphs.c
+1418122864 source:c:\cppk\graphs\functions4graphs.c
 	"functions4graphs.h"
 	"limits.h"
 
-1417087870 c:\cppk\graphs\functions4graphs.h
+1418122864 c:\cppk\graphs\functions4graphs.h
 	"stack.h"
+
+1416687029 source:c:\cppk\graphs_1_4\stack.c
+	"stack.h"
+
+1416687353 c:\cppk\graphs_1_4\stack.h
+	<stdio.h>
+	<stdlib.h>
 

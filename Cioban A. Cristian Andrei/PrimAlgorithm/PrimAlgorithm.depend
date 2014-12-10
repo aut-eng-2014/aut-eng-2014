@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1417620188 source:e:\projects\workspace codeblocks\primalgorithm\main.c
+	<stdio.h>
+	<stdlib.h>
+	"prim.h"
+
+1417620187 e:\projects\workspace codeblocks\primalgorithm\prim.h
+	<stdio.h>
+	<stdlib.h>
+

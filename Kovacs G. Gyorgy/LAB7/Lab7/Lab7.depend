@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1416468849 source:d:\30322\lab7.c
+	<stdio.h>
+	<stdlib.h>
+	"QNS.h"
+
+1416469338 d:\30322\qns.h
+	<stdlib.h>
+	<stdio.h>
+
+1416469349 source:d:\30322\qns.c
+	"QNS.h"
+
+1416757070 source:d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab7\lab7\qns.c
+	"QNS.h"
+
+1416936741 d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab7\lab7\qns.h
+	<stdlib.h>
+	<stdio.h>
+
+1416936741 source:d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab7\lab7\graph.c
+	"graph.h"
+
+1416936638 d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab7\lab7\graph.h
+	<stdio.h>
+	"QNS.h"
+
+1416935689 source:d:\ut\dsa\sem1_stuff\kovacs g. gyorgy\lab7\lab7\lab7.c
+	"graph.h"
+

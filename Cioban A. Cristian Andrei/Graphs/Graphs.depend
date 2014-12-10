@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1417040219 source:e:\projects\workspace codeblocks\graphs\graph.c
+	"graph.h"
+	"SnQ.h"
+
+1417033313 e:\projects\workspace codeblocks\graphs\graph.h
+	<stdlib.h>
+	<stdio.h>
+
+1417036407 e:\projects\workspace codeblocks\graphs\snq.h
+	<stdlib.h>
+	<stdio.h>
+
+1417040231 source:e:\projects\workspace codeblocks\graphs\snq.c
+	"SnQ.h"
+
+1417040174 source:e:\projects\workspace codeblocks\graphs\main.c
+	<stdlib.h>
+	<stdio.h>
+	"SnQ.h"
+	"graph.h"
+

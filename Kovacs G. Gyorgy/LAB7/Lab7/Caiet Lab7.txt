@@ -1,0 +1,38 @@
+9:57 AM 11/20/2014
+
+Graphs
+
+    Vertex == Node
+    Edge == Connection
+
+    Matrix Representation:
+    Can be represented with square matrices.
+    Example:
+
+      A B C D E F
+    A 0 1 1 0 0 1
+    B 1 0 1 1 0 0
+    C 1 1 0 1 1 1
+    D 0 1 1 0 0 1
+    E 0 0 1 0 0 0
+    F 1 0 1 1 0 0
+
+    ->See Lab7.jpg
+
+    Adjacency List Representation:
+
+    Adjacent List:
+
+    A->B->C->F
+    B->A->C->D
+    C->A->B->D->E->F
+    D->B->C->F
+    E->C
+    F->A->C->D
+
+    Traversals:
+
+    BFT / DFT
+    (Breadth First Traversal / Depth First Traversal)
+    BFT : A,B,C,F,D,E -> Queue
+    DFT : A,B,C,D,F,E -> Stack

@@ -9,3 +9,8 @@ v1.0
 - restructured this folder
 v1.1
 - added homework to lab 05
+v1.2
+- added homework to lab 06
+- rectified a mistake from the homework for lab 05 (added the homework to wrong person)
+v1.3
+- added homework to lab 07

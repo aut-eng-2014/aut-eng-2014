@@ -4,7 +4,7 @@
 #define MAXN 100
 #define INFTY 32000
 
-void Dijkstra(int n, int c[MAXN][MAXN], int start) {
+void Dijkstra(int n, int **c , int start) {
 
     /*
         n = nr of vertices

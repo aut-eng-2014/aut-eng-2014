@@ -1,4 +1,4 @@
-#include "dijkstra.h"
+#include "floydwarshall.h"
 
 
 int main() {
@@ -7,7 +7,7 @@ int main() {
 	f = fopen("graph.txt", "r");
 	if (f != NULL)
 	{
-		int v = 0,i,j;
+		int v ,i , j;
 		//number of vertices
 		fscanf(f, "%d\n", &v);
 		//declare a matrix to hold the costs
@@ -29,9 +29,8 @@ int main() {
 			}
 			printf("\n");
 		}
-
-		//call dijkstra method
-		Dijkstra(v, graph, 1);
+		//call floydWarshall method
+		floydWarshall(v, graph);
 
 	}
 	printf("\n\n");

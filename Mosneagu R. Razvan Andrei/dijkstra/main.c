@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define INF 65000
 
-int **prims(int **ingraph,int n)
+int **dijkstra(int **ingraph,int n)
 {
     int i,j,lastNode=0,min=INF,nextNode,nodesLeft;
     nodesLeft=n-1;
@@ -45,26 +45,17 @@ int **prims(int **ingraph,int n)
         lastNode=nextNode;
         nodesLeft--;
     }
-    printf("Costurile muchiilor sunt: ");
+    printf("Costs of edges are: ");
     for(i=0;i<n;i++) printf("%d ",key[i]);
     printf("\n");
 
     for(i=0; i<n; i++)
         for(j=i; j<n; j++)
             if(outree[i][j]!=0)
-            printf("\nMuchia %d - %d, cost: %d",i,j,outree[i][j]);
+            printf("\nEdge %d - %d, cost: %d",i,j,outree[i][j]);
 
         return outree;
     return 0;
-}
-
-int cost(int **inmat,int n)
-{
-    int i,j,price=0;
-    for(i=0; i<n; i++)
-        for(j=0; j<n; j++)
-            price+=inmat[i][j];
-    return price/2;
 }
 
 int **read(int *n)
@@ -95,8 +86,8 @@ int main()
     int numberOfNodes;
     int **adjMatrix=read(&numberOfNodes);
     int **returtree,i,j;
-    returtree=prims(adjMatrix,numberOfNodes);
-    printf("\n\nMatricea de adiacenta a grafului nou construit este: \n");
+    returtree=dijkstra(adjMatrix,numberOfNodes);
+    printf("\n\nAdjacency matrix of the new built graph is: \n");
     for(i=0; i<numberOfNodes; i++)
     {
         for(j=0; j<numberOfNodes; j++)

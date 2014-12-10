@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1418248354 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\sorting\helperfunctions.c
+	"HelperFunctions.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1418249124 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\sorting\main.c
+	"SortingAlgorithms.h"
+	"HelperFunctions.h"
+
+1418247097 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\sorting\sortingalgorithms.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<time.h>
+
+1418247100 source:c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\sorting\sortingalgorithms.c
+	"SortingAlgorithms.h"
+
+1418248336 c:\users\alex\desktop\predare\an2\aut-eng-2014\_rezolvari\sorting\helperfunctions.h
+

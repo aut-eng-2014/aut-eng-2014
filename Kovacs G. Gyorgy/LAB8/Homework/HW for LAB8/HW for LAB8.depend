@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1417070629 source:d:\30322\chestii\kovacs g. gyorgy\lab8\homework\hw for lab8\graph.c
+	"graph.h"
+
+1417068781 d:\30322\chestii\kovacs g. gyorgy\lab8\homework\hw for lab8\graph.h
+	<stdio.h>
+	"QNS.h"
+
+1417068781 d:\30322\chestii\kovacs g. gyorgy\lab8\homework\hw for lab8\qns.h
+	<stdlib.h>
+	<stdio.h>
+
+1417070513 source:d:\30322\chestii\kovacs g. gyorgy\lab8\homework\hw for lab8\lab7.c
+	"graph.h"
+
+1417070268 source:d:\30322\chestii\kovacs g. gyorgy\lab8\homework\hw for lab8\qns.c
+	"QNS.h"
+

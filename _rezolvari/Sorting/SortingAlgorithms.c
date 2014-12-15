@@ -94,7 +94,6 @@ void merge(int *a, int low, int high, int mid, int *endResult)
             endResult[i]=a[h];
             assignments++;
             h++;
-            i++;
         }
         else
         {

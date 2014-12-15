@@ -1,8 +1,8 @@
 #include "SortingAlgorithms.h"
 #include "HelperFunctions.h"
 
-int MAX = 10000;
-int MIN = 100;
+int MAX = 101;
+int MIN = 101;
 int STEP = 100;
 
 void doBubbleSort();
@@ -205,6 +205,8 @@ void doMergeSort()
         fprintf(fpWorst,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
         resetCounters();
         printf("N: %d\n",currentCount);
+
+        printToScreen(b,currentCount);
     }
     fclose(fpBest);
     fclose(fpAverage);

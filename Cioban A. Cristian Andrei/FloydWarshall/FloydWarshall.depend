@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1418245643 source:e:\projects\workspace codeblocks\floydwarshall\main.c
-	"floydwarshall.h"
-
-1418245698 e:\projects\workspace codeblocks\floydwarshall\floydwarshall.h
-	<stdio.h>
-	<stdlib.h>
-

@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1418847525 source:e:\projects\workspace codeblocks\radixsort\main.c
+	<stdio.h>
+	<stdlib.h>
+	"radix.h"
+
+1418847586 e:\projects\workspace codeblocks\radixsort\radix.h
+

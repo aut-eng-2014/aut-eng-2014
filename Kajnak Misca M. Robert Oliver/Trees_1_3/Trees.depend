@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1414421710 source:c:\cppk\trees\main.c
+	<stdio.h>
+	<stdlib.h>
+	"functions.h"
+
+1414421710 source:c:\cppk\trees\functions.c
+	"functions.h"
+
+1414421710 c:\cppk\trees\functions.h
+	<stdio.h>
+	<stdlib.h>
+

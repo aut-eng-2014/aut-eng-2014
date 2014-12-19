@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1415265278 source:d:\diana\documente\facultate\an ii\sem i\data structures and algorithm\code\test queue and stack\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+

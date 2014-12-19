@@ -1,0 +1,169 @@
+//I tried to do to a better listing of results for FW's algorithm, so that's why the source code comes from two files, one for
+//Dijkstra's algorithm and one for FW.
+//
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define INF INT_MAX
+
+int minimum(int distance[], int flag[], int V) //V=number of vertices
+{
+    int min=INF;
+    int index; //the index of the smallest distance (aka the index of min)
+    int v;
+    for (v=0; v<V; v++)
+    {
+        if ((flag[v]==0)&&(distance[v]<=min)) //i used flag as a "visited" sign
+        {
+            min=distance[v];
+            index=v;
+        }
+    }
+    return index;
+}
+
+int printDijk(int dist[], int V) //this one i borrowed, it's just for nice printing
+{
+    int i;
+    printf("Vertex  Distance from src\n");
+    for (i=0; i<V; i++)
+    {
+        printf("%d \t %d\n", i, dist[i]);
+    }
+}
+
+void Dijk(int V, int G[V][V], int src)
+{
+    int distance[V];
+    int flag[V];//has value 1 for visited and 0 for not visited
+    int i,count,u,v;
+    for (i=0; i<V; i++)
+    {
+        distance[i]=INF; //initialize distance with infinity
+        flag[i]=0;       //and visited with 0
+    }
+    distance[src]=0;     //distance from starting point is 0
+    for (count=0; count<V; count++)
+    {
+        u=minimum(distance,flag,V);
+        flag[u]=1;
+        for (v=0; v<V; v++)
+        {
+            if((flag[v]==0)&&(G[u][v])&&(distance[u]!=INF)&&((distance[u]+G[u][v])<distance[v]))
+            //if v is not visited and there is an edge from u to v and total distance of path from src to v through u is
+            //smaller than the current value of distance[v] it changes distance[v]
+            {
+                distance[v]=distance[u]+G[u][v];
+            }
+        }
+    }
+    printDijk(distance,V);
+}
+
+int main()
+{
+    FILE *f;
+    int V,i,j;
+    f=fopen("graph.txt","r");
+    if (f==NULL)
+    {
+        printf("Error");
+    }
+    else
+    {
+        fscanf(f,"%d\n",&V);
+        int G[V][V];
+        for (i=0; i<V; i++)
+        {
+            for (j=0; j<V; j++)
+            {
+                fscanf(f,"%d ",&G[i][j]);
+            }
+        }
+        Dijk(V,G,2);
+    }
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define INF INT_MAX
+
+void FW(int V, int G[V][V], int distance[V][V], int parent[V][V])
+{
+    int i,j,k;
+    for (i=0; i<V; i++)
+    {
+        for (j=0; j<V; j++)
+        {
+            distance[i][j]=G[i][j];
+            parent[i][j]=j;
+        }
+    }
+    for (k=0; k<V; k++)
+    {
+        for (i=0; i<V; i++)
+        {
+            for (j=0; j<V; j++)
+                if (distance[i][k]+distance[k][j]<distance[i][j])
+                {
+                    distance[i][j]=distance[i][k]+distance[k][j];
+                    parent[i][j]=k;
+                }
+                else parent[i][j]=0;
+        }
+    }
+}
+//for keeping the minimum paths we use the matrix parent, where parent[i][j] holds the vertice k which lead to 
+// the minimum distance distance[i][j]; if parent[i][j]==0, the edge (i,j) is the minimum path between i and j
+void path(int i, int j,int V, int parent[V][V])
+{
+    int k;
+    k=parent[i][j];
+    if (k!=0)
+    {
+        printf(" %d ->",i);
+        path(i,k,V,parent);
+        printf(" %d ->",k);
+        path(k,j,V,parent);
+    }
+}
+int main()
+{
+    FILE *f;
+    int V;
+    int i,j;
+    f=fopen("graph.txt","r");
+    if (f==NULL)
+    {
+        printf("Error");
+    }
+    else
+    {
+        fscanf(f,"%d\n",&V);
+        int G[V][V], parent[V][V], distance[V][V];
+        for (i=0; i<V; i++)
+        {
+            for (j=0; j<V; j++)
+            {
+                fscanf(f,"%d ",&G[i][j]);
+            }
+        }
+    FW(V,G,distance,parent);
+    for (i=0; i<V; i++)
+        for (j=0; j<V; j++)
+        {
+            printf("%d - %d: ",i,j);
+            if (parent[i][j]==0) printf(" %d -> %d  total distance= %d",i,j,distance[i][j]);
+            else
+            {
+                path(i,j,V,parent);
+                printf(" %d     total distance= %d",j,distance[i][j]);
+            }
+            printf("\n");
+        }
+}
+}

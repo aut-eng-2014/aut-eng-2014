@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1413384713 source:c:\users\tomy\desktop\utproj\week2\week2.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<time.h>
+

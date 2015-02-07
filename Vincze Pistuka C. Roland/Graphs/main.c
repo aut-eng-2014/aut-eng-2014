@@ -60,6 +60,7 @@ void push (int x)
     temp->key=x;
     temp->next=forw;
     forw=temp;
+    value=forw->key;
 }
 
 void pop ()
@@ -129,6 +130,13 @@ void bfs(int sizem)
                 enqueue(j);
                 printf ("\nnode visited: %d", j);
             }
+            if (adj_matrix[j][value]==1 && visitednodes[j]==0)
+            {
+                visitednodes[j]=1;
+                enqueue(j);
+                printf ("\nNode checked is: %d", j);
+                j=0;
+            }
         }
     }
 }
@@ -152,6 +160,13 @@ void dfs (int sizem)
         for (j=0; j<sizem; j++)
         {
             if (adj_matrix[value][j]==1 && checked[j]==0)
+            {
+                checked[j]=1;
+                push(j);
+                printf ("\nNode checked is: %d", j);
+                j=0;
+            }
+             if (adj_matrix[j][value]==1 && checked[j]==0)
             {
                 checked[j]=1;
                 push(j);
@@ -184,7 +199,7 @@ int main()
         }
     }
     bfs (sizem);
-    dfs(sizem);
+    //dfs(sizem);
     return 0;
 }
 

@@ -10,18 +10,22 @@ void doInsertionSort();
 void doSelectionSort();
 void doMergeSort();
 void doQuickSort();
+void doBogoSort();  // by Kovax
+void doCountingSort(); // by Kovax
+void doRadixSort(); // by Kovax
 void changeConstants();
 void removeFiles();
 
 int main()
 {
-    printf("A - Bubble Sort\nB - Insertion Sort\nC - Selection Sort\nD - Merge Sort\nE - QuickSort\nF - All Sorting Algorithms\nX - Remove Files\nN - Change constants\nQ - Quit\n");
+    printf("A - Bubble Sort\nB - Insertion Sort\nC - Selection Sort\nD - Merge Sort\nE - QuickSort\nF - Counting Sort\nG - RadixSort\nH - BogoSort\nI - All Sorting Algorithms\nX - Remove Files\nN - Change constants\nQ - Quit\n");
 
     char choice;
     while(1)
     {
         printf("Choice: ");
         choice = getch();
+        choice = toupper(choice); //Because I can
         printf("\n");
         switch(choice)
         {
@@ -44,8 +48,16 @@ int main()
         case 'E':
             doQuickSort();
             break;
-
         case 'F':
+            doBogoSort();
+            break;
+        case 'G':
+            doCountingSort();
+            break;
+        case 'H':
+            doRadixSort();
+            break;
+        case 'I':
             doBubbleSort();
             doInsertionSort();
             doSelectionSort();
@@ -238,6 +250,108 @@ void doQuickSort()
 
         generateWorst(&a,currentCount);
         quicksort(a,0, currentCount-1);
+        fprintf(fpWorst,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+        printf("N: %d\n",currentCount);
+    }
+    fclose(fpBest);
+    fclose(fpAverage);
+    fclose(fpWorst);
+}
+
+void doCountingSort()
+{
+    printf("Performing Counting Sort with MIN = %d, MAX = %d and STEP = %d\n",MIN,MAX,STEP);
+    FILE *fpBest,*fpWorst,*fpAverage;
+    int currentCount;
+    //! Counting
+    fpBest = fopen("results/CountingSort-Best.csv","w");
+    fpAverage = fopen("results/CountingSort-Average.csv","w");
+    fpWorst = fopen("results/CountingSort-Worst.csv","w");
+    for(currentCount=MIN; currentCount<=MAX; currentCount+=STEP)
+    {
+        int *a;
+        generateBest(&a,currentCount);
+        countingSort(a,currentCount);
+        fprintf(fpBest,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+
+
+        generateAverage(&a,currentCount);
+        countingSort(a,currentCount);
+        fprintf(fpAverage,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+
+        generateWorst(&a,currentCount);
+        countingSort(a,currentCount);
+        fprintf(fpWorst,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+        printf("N: %d\n",currentCount);
+    }
+    fclose(fpBest);
+    fclose(fpAverage);
+    fclose(fpWorst);
+}
+
+void doRadixSort()
+{
+    printf("Performing Radix Sort with MIN = %d, MAX = %d and STEP = %d\n",MIN,MAX,STEP);
+    FILE *fpBest,*fpWorst,*fpAverage;
+    int currentCount;
+    //! Radix Sort
+    fpBest = fopen("results/RadixSort-Best.csv","w");
+    fpAverage = fopen("results/RadixSort-Average.csv","w");
+    fpWorst = fopen("results/RadixSort-Worst.csv","w");
+    for(currentCount=MIN; currentCount<=MAX; currentCount+=STEP)
+    {
+        int *a;
+        generateBest(&a,currentCount);
+        radixSort(a,currentCount);
+        fprintf(fpBest,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+
+
+        generateAverage(&a,currentCount);
+        radixSort(a,currentCount);
+        fprintf(fpAverage,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+
+        generateWorst(&a,currentCount);
+        radixSort(a,currentCount);
+        fprintf(fpWorst,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+        printf("N: %d\n",currentCount);
+    }
+    fclose(fpBest);
+    fclose(fpAverage);
+    fclose(fpWorst);
+}
+
+void doBogoSort()
+{
+    printf("Performing Bogo Sort with MIN = %d, MAX = %d and STEP = %d\n",MIN,MAX,STEP);
+    FILE *fpBest,*fpWorst,*fpAverage;
+    int currentCount;
+    //! Bogo Sort
+    fpBest = fopen("results/BogoSort-Best.csv","w");
+    fpAverage = fopen("results/BogoSort-Average.csv","w");
+    fpWorst = fopen("results/BogoSort-Worst.csv","w");
+    for(currentCount=MIN; currentCount<=MAX; currentCount+=STEP)
+    {
+        int *a;
+        generateBest(&a,currentCount);
+        bogoSort(a,currentCount);
+        fprintf(fpBest,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+
+
+        generateAverage(&a,currentCount);
+        bogoSort(a,currentCount);
+        fprintf(fpAverage,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
+        resetCounters();
+
+        generateWorst(&a,currentCount);
+        bogoSort(a,currentCount);
         fprintf(fpWorst,"%d,%lu,%lu,%lu\n",currentCount,assignments,comparisons,assignments+comparisons);
         resetCounters();
         printf("N: %d\n",currentCount);

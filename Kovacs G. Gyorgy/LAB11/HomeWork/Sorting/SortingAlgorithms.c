@@ -193,6 +193,126 @@ void quicksort(int *x, int m, int n)
     }
 }
 
+/****************************************************
+******************* Counting Sort *******************
+****************************************************/
+void countingSort(int *x, int n){
+    int i;
+    int *counter = (int*) malloc(sizeof(int) * INT_MAX);
+    // If there would be a way to set starting values while allocating the memory, that would be great...
+    for (i = 0; i < INT_MAX; i++){
+        counter[i] = 0; // anyhow, this technically takes constant time... so this is O(1).
+    }
+
+    for (i = 0; i < n; i++){
+        counter[x[i]]++;
+        assignments++;
+    }
+
+    int index_of_x = 0;
+    int j;
+    for (i = 0; i < INT_MAX; i++){
+        if (counter[i] != 0){
+            for (j = 0; j < counter[i]; j++){
+                x[index_of_x++] = i;
+                assignments++;
+            }
+        }
+    }
+    if (index_of_x != n){
+        //this should never happen
+        exit(1);
+    }
+    // no comparisons WOOT!
+}
+
+/****************************************************
+******************* Radix Sort **********************
+****************************************************/
+
+#define DIGITS 6
+
+void radixSort(int *x, int n){
+    return; //TODO finish this stuff someday...
+  int counter[n][DIGITS];
+  int i,j,k;
+  for (i = 0; i < n; i++){
+    for (j = 0; j < DIGITS; j++){
+        counter[i][j] = 0;
+
+    }
+  }
+
+  for (i = 0; i < n; i ++){
+    while (x[i] > 0){
+        int temp = 0;
+        counter[i][temp++] = x[i] % 10;
+        x[i] /= 10;
+    }
+  }
+
+  int currentDigitNumber = DIGITS + 1;
+  for (i = 1; i <= n; i++){
+    currentDigitNumber--;
+    int localBiggestDigitNumber = 0;
+    int indexOfLocalBiggestDigitNumber = 0;
+    for (j = i; j < n; j++){
+        if (counter[j][currentDigitNumber] > currentDigitNumber){
+            currentDigitNumber = counter[j][currentDigitNumber];
+            indexOfLocalBiggestDigitNumber = j;
+        }
+    }
+
+    for (j = currentDigitNumber; j ==0; j--){
+        x[n-i-1] = x[n-i-1] * 10 + counter[indexOfLocalBiggestDigitNumber][localBiggestDigitNumber];
+    }
+  }
+}
+
+/****************************************************
+******************* Bogo Sort ***********************
+****************************************************/
+void shuffle(int *x, int n){
+    int *a = (int*) malloc(sizeof(int) * n);
+    int i;
+    for (i = 0; i < n; i++){
+        a[i] = -1;
+    }
+
+    for (i = 0; i < n; i++){
+        int temp = rand() % n;
+        if (a[temp] == -1){
+            temp = 0;
+        }
+        while (a[temp] == -1){
+            temp++;
+        }
+        a[temp] = x[i];
+        assignments++;
+    }
+
+    for(i = 0; i < n; i++){
+        x[i] = a[i];
+        assignments++;
+    }
+}
+
+bool isSorted(int *x, int n){
+    int i;
+    for (i = 0; i < n-1; i++){
+        comparisons++;
+        if (x[i] > x[i+1]) return false;
+    }
+    return true;
+}
+
+void bogoSort(int *x, int n){
+    srand(time(0));
+    while (!isSorted(x,n)){
+        shuffle(x,n);
+    }
+}
+
 void resetCounters()
 {
     comparisons=0;

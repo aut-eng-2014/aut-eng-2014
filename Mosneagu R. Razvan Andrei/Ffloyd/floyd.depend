@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1418228353 source:d:\programs\floyd\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

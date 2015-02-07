@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1418755257 source:c:\cppk\sortingalgorithms\main.c
+	"sorts.h"
+
+1418763179 source:c:\cppk\sortingalgorithms\sorts.c
+	"sorts.h"
+
+1418755195 c:\cppk\sortingalgorithms\sorts.h
+	"auxFunctions.h"
+	"stack.h"
+
+1418752055 c:\cppk\sortingalgorithms\auxfunctions.h
+	<time.h>
+	<stdlib.h>
+	<stdio.h>
+	<limits.h>
+
+1418752055 source:c:\cppk\sortingalgorithms\auxfunctions.c
+	"auxFunctions.h"
+
+1418752040 c:\cppk\sortingalgorithms\stack.h
+	<stdio.h>
+	<stdlib.h>
+
+1418752040 source:c:\cppk\sortingalgorithms\stack.c
+	"stack.h"
+

@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1420699482 source:c:\cppk\exam_excercise_manhattan\list.c
+
+1420734480 source:c:\cppk\exam_excercise_manhattan\main.c
+	<stdio.h>
+	<stdlib.h>
+	"auxfunctions.h"
+	<limits.h>
+
+1420699453 source:c:\cppk\exam_excercise_manhattan\sort.c
+
+1418752055 c:\cppk\exam_excercise_manhattan\auxfunctions.h
+	<time.h>
+	<stdlib.h>
+	<stdio.h>
+	<limits.h>
+
+1420699482 source:c:\cppk\0_gitbucket\dsa\aut-eng-2014\kajnak misca m. robert oliver\exam_excercise_manhattan\list.c
+
+1420699453 source:c:\cppk\0_gitbucket\dsa\aut-eng-2014\kajnak misca m. robert oliver\exam_excercise_manhattan\sort.c
+
+1420734652 source:c:\cppk\0_gitbucket\dsa\aut-eng-2014\kajnak misca m. robert oliver\exam_excercise_manhattan\main.c
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+
